@@ -1,0 +1,5 @@
+{
+    "name": "Combinatorics Functions",
+    "description": "Common combinatorics functions (combinations, permutations)",
+    "code": "def combinations(n, k):\n    \"\"\"\n    Calculate number of combinations (n choose k).\n    \"\"\"\n    if k > n:\n        return 0\n    result = 1\n    for i in range(1, k + 1):\n        result = result * (n - k + i) // i\n    return result\n\ndef permutations(n, k):\n    \"\"\"\n    Calculate number of permutations (n P k).\n    \"\"\"\n    if k > n:\n        return 0\n    result = 1\n    for i in range(n - k + 1, n + 1):\n        result *= i\n    return result\n"
+}

@@ -1,0 +1,8 @@
+Problem 160: Factorial Trailing Digits
+
+For any $N$, let $f(N)$ be the last five digits before the trailing zeroes in $N!$. For example, $9! = 362880$ so $f(9)=36288$ $10! = 3628800$ so $f(10)=36288$ $20! = 2432902008176640000$ so $f(20)=17664$ Find $f(1\,000\,000\,000\,000)$.
+
+Hint: 
+1. Break down the problem into smaller steps
+2. Consider mathematical properties that might simplify the solution
+3. Think about efficient algorithms to solve this type of problem

@@ -1,0 +1,30 @@
+{
+    "name": "Chuck",
+    "type": "editor",
+    "settings": {
+        "template_editor": {
+            "font_family": "MesloLGS NF",
+            "font_size": 12,
+            "text_color": "#f6d32d",
+            "background_color": "#000066"
+        },
+        "code_editor": {
+            "font_family": "MesloLGS NF",
+            "font_size": 12,
+            "text_color": "#f6d32d",
+            "background_color": "#000066"
+        },
+        "helper_editor": {
+            "font_family": "MesloLGS NF",
+            "font_size": 12,
+            "text_color": "#f6d32d",
+            "background_color": "#000066"
+        },
+        "data_files": {
+            "font_family": "MesloLGS NF",
+            "font_size": 12,
+            "text_color": "#33d17a",
+            "background_color": "#000066"
+        }
+    }
+}

@@ -1,0 +1,8 @@
+Problem 625: Gcd Sum
+
+$G(N)=\sum_{j=1}^N\sum_{i=1}^j \gcd(i,j)$. You are given: $G(10)=122$. Find $G(10^{11})$. Give your answer modulo $998244353$.
+
+Hint: 
+1. Break down the problem into smaller steps
+2. Consider mathematical properties that might simplify the solution
+3. Think about efficient algorithms to solve this type of problem

@@ -1,0 +1,8 @@
+Problem 291: Panaitopol Primes
+
+A prime number $p$ is called a Panaitopol prime if $p = \dfrac{x^4 - y^4}{x^3 + y^3}$ for some positive integers $x$ and $y$. Find how many Panaitopol primes are less than $5 \times 10^{15}$.
+
+Hint: 
+1. Break down the problem into smaller steps
+2. Consider mathematical properties that might simplify the solution
+3. Think about efficient algorithms to solve this type of problem

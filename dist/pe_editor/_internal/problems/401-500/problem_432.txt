@@ -1,0 +1,8 @@
+Problem 432: Totient Sum
+
+Let $S(n,m) = \sum\phi(n \times i)$ for $1 \leq i \leq m$. ($\phi$ is Euler's totient function) You are given that $S(510510,10^6)= 45480596821125120$. Find $S(510510,10^{11})$. Give the last $9$ digits of your answer.
+
+Hint: 
+1. Break down the problem into smaller steps
+2. Consider mathematical properties that might simplify the solution
+3. Think about efficient algorithms to solve this type of problem

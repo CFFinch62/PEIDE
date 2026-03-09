@@ -1,0 +1,8 @@
+Problem 831: Triple Product
+
+Let $g(m)$ be the integer defined by the following double sum of products of binomial coefficients: $$\sum_{j=0}^m\sum_{i = 0}^j (-1)^{j-i}\binom mj \binom ji \binom{j+5+6i}{j+5}.$$ You are given that $g(10) = 127278262644918$. Its first (most significant) five digits are $12727$. Find the first ten digits of $g(142857)$ when written in base $7$.
+
+Hint: 
+1. Break down the problem into smaller steps
+2. Consider mathematical properties that might simplify the solution
+3. Think about efficient algorithms to solve this type of problem

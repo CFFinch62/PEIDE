@@ -1,0 +1,8 @@
+Problem 279: Triangles with Integral Sides and an Integral Angle 
+
+How many triangles are there with integral sides, at least one integral angle (measured in degrees), and a perimeter that does not exceed $10^8$?
+
+Hint: 
+1. Break down the problem into smaller steps
+2. Consider mathematical properties that might simplify the solution
+3. Think about efficient algorithms to solve this type of problem

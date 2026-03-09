@@ -1,0 +1,8 @@
+Problem 830: Binomials and Powers
+
+Let $\displaystyle S(n)=\sum\limits_{k=0}^{n}\binom{n}{k}k^n$. You are given, $S(10)=142469423360$. Find $S(10^{18})$. Submit your answer modulo $83^3 89^3 97^3$.
+
+Hint: 
+1. Break down the problem into smaller steps
+2. Consider mathematical properties that might simplify the solution
+3. Think about efficient algorithms to solve this type of problem

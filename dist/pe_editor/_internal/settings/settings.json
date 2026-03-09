@@ -1,0 +1,71 @@
+{
+    "template_editor": {
+        "font_family": "MesloLGS NF",
+        "font_size": 12,
+        "text_color": "#f6d32d",
+        "background_color": "#000066"
+    },
+    "code_editor": {
+        "font_family": "MesloLGS NF",
+        "font_size": 14,
+        "text_color": "#f6d32d",
+        "background_color": "#000066"
+    },
+    "helper_editor": {
+        "font_family": "MesloLGS NF",
+        "font_size": 12,
+        "text_color": "#f6d32d",
+        "background_color": "#000066"
+    },
+    "data_files": {
+        "font_family": "MesloLGS NF",
+        "font_size": 12,
+        "text_color": "#33d17a",
+        "background_color": "#000066"
+    },
+    "syntax_highlighting": {
+        "keywords": "#0433ff",
+        "strings": "#aa7942",
+        "numbers": "#ff9300",
+        "comments": "#00f900",
+        "operators": "#00fdff",
+        "functions": "#ff40ff",
+        "punctuation": "#00fdff"
+    },
+    "code_formatting": {
+        "auto_format_on_save": false,
+        "line_length": 88,
+        "skip_string_normalization": false
+    },
+    "code_linting": {
+        "auto_lint_on_save": false,
+        "disabled_checks": "",
+        "threshold": 7
+    },
+    "theme": "dark",
+    "problem_text": {
+        "font_family": "Courier New",
+        "font_size": 12,
+        "text_color": "#FFFFFF",
+        "background_color": "#000000"
+    },
+    "tutorial_editor": {
+        "password": "euler123",
+        "font_family": "Monospace",
+        "font_size": 12,
+        "text_color": "#deddda",
+        "background_color": "#000000"
+    },
+    "debug": {
+        "enabled": true,
+        "levels": {
+            "debug": true,
+            "important": true,
+            "info": true,
+            "error": true,
+            "detail": true,
+            "trace": true
+        },
+        "show_timestamps": true
+    }
+}

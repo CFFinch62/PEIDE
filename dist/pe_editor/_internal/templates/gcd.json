@@ -1,0 +1,5 @@
+{
+    "name": "GCD",
+    "description": "",
+    "code": "def gcd(a, b):\n    # while b is not 0\n    while b:\n        # swap a and b after dividing a by b\n        a, b = b, a % b\n    return a"
+}

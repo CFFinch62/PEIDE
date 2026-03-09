@@ -1,0 +1,8 @@
+Problem 642: Sum of Largest Prime Factors
+
+Let $f(n)$ be the largest prime factor of $n$ and $\displaystyle F(n) = \sum_{i=2}^n f(i)$. For example $F(10)=32$, $F(100)=1915$ and $F(10000)=10118280$. Find $F(201820182018)$. Give your answer modulus $10^9$.
+
+Hint: 
+1. Break down the problem into smaller steps
+2. Consider mathematical properties that might simplify the solution
+3. Think about efficient algorithms to solve this type of problem

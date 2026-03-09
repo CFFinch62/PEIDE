@@ -1,0 +1,8 @@
+Problem 250: $250250$
+
+Find the number of non-empty subsets of $\{1^1, 2^2, 3^3,\dots, 250250^{250250}\}$, the sum of whose elements is divisible by $250$. Enter the rightmost $16$ digits as your answer.
+
+Hint: 
+1. Break down the problem into smaller steps
+2. Consider mathematical properties that might simplify the solution
+3. Think about efficient algorithms to solve this type of problem

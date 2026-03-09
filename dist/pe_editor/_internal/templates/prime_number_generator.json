@@ -1,0 +1,5 @@
+{
+    "name": "Prime Number Generator",
+    "description": "Efficient prime number generator using Sieve of Eratosthenes",
+    "code": "def generate_primes(limit):\n    \"\"\"\n    Generate all prime numbers up to limit using Sieve of Eratosthenes.\n    Returns a list of primes.\n    \"\"\"\n    sieve = [True] * (limit + 1)\n    sieve[0] = sieve[1] = False\n    \n    for i in range(2, int(limit ** 0.5) + 1):\n        if sieve[i]:\n            sieve[i*i::i] = [False] * len(sieve[i*i::i])\n    \n    return [i for i, is_prime in enumerate(sieve) if is_prime]\n"
+}

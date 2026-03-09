@@ -1,0 +1,8 @@
+Problem 581: $47$-smooth Triangular Numbers
+
+A number is $p$-smooth if it has no prime factors larger than $p$. Let $T$ be the sequence of triangular numbers, i.e. $T(n)=n(n+1)/2$. Find the sum of all indices $n$ such that $T(n)$ is $47$-smooth.
+
+Hint: 
+1. Break down the problem into smaller steps
+2. Consider mathematical properties that might simplify the solution
+3. Think about efficient algorithms to solve this type of problem

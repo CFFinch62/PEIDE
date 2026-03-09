@@ -1,0 +1,12 @@
+{
+    "name": "Chuck",
+    "colors": {
+        "keywords": "#0433ff",
+        "strings": "#aa7942",
+        "numbers": "#ff9300",
+        "comments": "#00f900",
+        "operators": "#00fdff",
+        "functions": "#ff40ff",
+        "punctuation": "#00fdff"
+    }
+}

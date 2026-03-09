@@ -1,0 +1,8 @@
+Problem 268: At Least Four Distinct Prime Factors Less Than 100
+
+It can be verified that there are $23$ positive integers less than $1000$ that are divisible by at least four distinct primes less than $100$. Find how many positive integers less than $10^{16}$ are divisible by at least four distinct primes less than $100$.
+
+Hint: 
+1. Break down the problem into smaller steps
+2. Consider mathematical properties that might simplify the solution
+3. Think about efficient algorithms to solve this type of problem

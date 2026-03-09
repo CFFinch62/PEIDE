@@ -1,0 +1,138 @@
+{
+  "title": "Using the Variable Inspector",
+  "steps": [
+    {
+      "title": "Introduction to the Variable Inspector",
+      "content": "The Variable Inspector is a powerful debugging tool that automatically tracks variables during code execution. It's located in the Debug tab, below the main debug output area.",
+      "action": "switch_tab",
+      "params": {
+        "target": "Debug Output",
+        "highlight": true
+      }
+    },
+    {
+      "title": "How Variable Tracking Works",
+      "content": "The Variable Inspector automatically detects variables from your debug messages. When you add debug messages with variable assignments, the system will track them automatically. Let's see this in action.",
+      "action": "select_problem",
+      "params": {
+        "problem_number": 1
+      }
+    },
+    {
+      "title": "Adding Debug Statements",
+      "content": "Let's modify our solution for Problem 1 to include debug statements. We'll include some variables to track in our debug messages.",
+      "action": "insert_code",
+      "params": {
+        "code": "def solve():\n    total = 0\n    \n    for i in range(1, 1000):\n        if i % 3 == 0 or i % 5 == 0:\n            total += i\n            debug(f\"i = {i}\")\n            debug(f\"total = {total}\")\n    \n    return total"
+      }
+    },
+    {
+      "title": "Running the Code",
+      "content": "Now let's run the code to see the Variable Inspector in action. Make sure debug output is enabled by checking the 'Enable Debug' checkbox in the Debug tab.",
+      "action": "enable_debug",
+      "params": {
+        "highlight": true
+      }
+    },
+    {
+      "title": "Execute the Solution",
+      "content": "Click the Run Code button to execute the solution. The Variable Inspector will automatically track the variables 'i' and 'total' as the code runs.",
+      "action": "click_button",
+      "params": {
+        "button": "Run Code",
+        "highlight": true
+      }
+    },
+    {
+      "title": "Examining Tracked Variables",
+      "content": "After the code runs, you can see the tracked variables in the Variable Inspector panel. Notice how it shows the variable name, current value, and when it was last updated.",
+      "action": "highlight_element",
+      "params": {
+        "element": "variable_inspector"
+      }
+    },
+    {
+      "title": "Variable Inspector Features",
+      "content": "The Variable Inspector offers several useful features:\n• Variables are color-coded by debug level\n• Timestamps show when variables were updated\n• Values are automatically updated when they change\n• You can search for specific variables using the search box",
+      "action": "highlight_element",
+      "params": {
+        "element": "search_field"
+      }
+    },
+    {
+      "title": "Context Menu Options",
+      "content": "You can right-click on the Variable Inspector to access additional options:\n• Copy: Copy selected variable details\n• Select All: Select all variables\n• Clear Variables: Remove all tracked variables",
+      "action": "show_context_menu",
+      "params": {
+        "element": "variable_inspector"
+      }
+    },
+    {
+      "title": "Tracking Different Variables",
+      "content": "Different debug levels are represented by different colors. Let's modify our code to use different debug levels for better organization.",
+      "action": "insert_code",
+      "params": {
+        "code": "def solve():\n    total = 0\n    \n    for i in range(1, 1000):\n        if i % 3 == 0 or i % 5 == 0:\n            total += i\n            debug(f\"i = {i}\", \"debug\")\n            debug(f\"total = {total}\", \"info\")\n            \n            if total % 1000 == 0:\n                debug(f\"Milestone: {total}\", \"important\")\n    \n    return total"
+      }
+    },
+    {
+      "title": "Filtering Debug Levels",
+      "content": "You can filter which debug levels are displayed by toggling the checkboxes at the top of the Debug panel. Try unchecking 'Debug' to hide regular debug messages.",
+      "action": "toggle_checkbox",
+      "params": {
+        "checkbox": "Debug",
+        "highlight": true
+      }
+    },
+    {
+      "title": "Using the Search Feature",
+      "content": "You can search for specific variables or values using the search box. Try typing 'total' to highlight all occurrences in both debug output and the Variable Inspector.",
+      "action": "focus_element",
+      "params": {
+        "element": "search_field",
+        "highlight": true
+      }
+    },
+    {
+      "title": "Using Variable Patterns",
+      "content": "The Variable Inspector recognizes two patterns:\n• var = value\n• var: value\n\nLet's add a variable using the colon format.",
+      "action": "insert_code",
+      "params": {
+        "code": "def solve():\n    total = 0\n    count = 0\n    \n    for i in range(1, 1000):\n        if i % 3 == 0 or i % 5 == 0:\n            total += i\n            count += 1\n            debug(f\"i = {i}\", \"debug\")\n            debug(f\"total = {total}\", \"info\")\n            debug(f\"count: {count}\", \"info\")\n    \n    return total"
+      }
+    },
+    {
+      "title": "Real-world Example",
+      "content": "The Variable Inspector is especially useful for complex algorithms. Try adding debug statements to track variables in any problem you're solving:",
+      "action": "insert_code",
+      "params": {
+        "code": "# Tracking variables in a helper function\ndef is_prime(n):\n    if n <= 1:\n        debug(f\"is_prime result: False (n={n})\", \"info\")\n        return False\n    if n <= 3:\n        debug(f\"is_prime result: True (n={n})\", \"info\")\n        return True\n    if n % 2 == 0 or n % 3 == 0:\n        debug(f\"is_prime result: False (n={n})\", \"info\")\n        return False\n    \n    i = 5\n    while i * i <= n:\n        debug(f\"testing i = {i}\", \"debug\")\n        if n % i == 0 or n % (i + 2) == 0:\n            debug(f\"is_prime result: False (n={n}, divisor={i})\", \"info\")\n            return False\n        i += 6\n    \n    debug(f\"is_prime result: True (n={n})\", \"info\")\n    return True"
+      }
+    },
+    {
+      "title": "Saving Debug Output",
+      "content": "You can save the debug output (including tracked variables) by clicking the Save button. This allows you to review your debugging session later or share it with others.",
+      "action": "highlight_element",
+      "params": {
+        "element": "save_debug_button"
+      }
+    },
+    {
+      "title": "Clearing Variables",
+      "content": "You can clear tracked variables at any time by right-clicking on the Variable Inspector and selecting 'Clear Variables'. Variables are also automatically cleared when you switch to a different problem.",
+      "action": "show_context_menu",
+      "params": {
+        "element": "variable_inspector",
+        "option": "Clear Variables"
+      }
+    },
+    {
+      "title": "Conclusion",
+      "content": "Congratulations! You now know how to use the Variable Inspector to track and monitor variables during code execution. This powerful feature will help you debug complex problems and understand how your algorithms work. Remember to use debug messages with variable assignments to get the most out of this tool.",
+      "action": "message",
+      "params": {
+        "message": "Variable Inspector Tutorial Complete!"
+      }
+    }
+  ]
+}

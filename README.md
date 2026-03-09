@@ -22,23 +22,35 @@ A comprehensive IDE designed specifically for solving and managing [Project Eule
 
 ## Installation
 
-1. Down lado the program:
-   ```
-   <www.fragillidaesoftware.com>
+1. **Download the pre-built binaries** for your operating system from the [Releases](https://github.com/CFFinch62/PEIDE/releases) page on our GitHub repository.
+   
+2. **Extract the archive**:
+   - On Windows: Extract the `.zip` file.
+   - On Linux/macOS: Extract the `.tar.gz` file.
 
+3. **Run the application**:
+   - Open the extracted folder.
+   - Run the `pe_editor` executable file (no installation of Python or dependencies required!).
+
+### Building from Source (Optional)
+
+If you prefer to run the application from source code instead of using the pre-built binaries:
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/CFFinch62/PEIDE.git
+   cd PEIDE
    ```
 
 2. Install dependencies:
-   ```
+   ```bash
    pip install -r requirements.txt
    ```
 
 3. Run the application:
-   ```
+   ```bash
    python pe_editor.py
    ```
-
-## Requirements
 
 - Python 3.8 or higher
 - PyQt6 for the user interface

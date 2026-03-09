@@ -1,0 +1,8 @@
+Problem 248: Euler's Totient Function Equals 13!
+
+The first number $n$ for which $\phi(n)=13!$ is $6227180929$. Find the $150\,000$th such number.
+
+Hint: 
+1. Break down the problem into smaller steps
+2. Consider mathematical properties that might simplify the solution
+3. Think about efficient algorithms to solve this type of problem

@@ -1,0 +1,8 @@
+Problem 845: Prime Digit Sum
+
+Let $D(n)$ be the $n$-th positive integer that has the sum of its digits a prime. For example, $D(61) = 157$ and $D(10^8) = 403539364$. Find $D(10^{16})$.
+
+Hint: 
+1. Break down the problem into smaller steps
+2. Consider mathematical properties that might simplify the solution
+3. Think about efficient algorithms to solve this type of problem

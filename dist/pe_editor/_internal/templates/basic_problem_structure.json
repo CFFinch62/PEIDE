@@ -1,0 +1,5 @@
+{
+    "name": "Basic Problem Structure",
+    "description": "Basic template for Project Euler problems",
+    "code": "\"\"\"\nProject Euler Problem {problem_number}\n\"\"\"\n\ndef solve():\n    \"\"\"\n    Your solution goes here.\n    This function should return the answer to the problem.\n    \"\"\"\n    # Your code here\n    return None\n\nif __name__ == \"__main__\":\n    print(solve())\n"
+}

@@ -1,0 +1,8 @@
+Problem 222: Sphere Packing
+
+What is the length of the shortest pipe, of internal radius $\pu{50 mm}$, that can fully contain $21$ balls of radii $\pu{30 mm}, \pu{31 mm}, \dots, \pu{50 mm}$? Give your answer in micrometres ($\pu{10^{-6} m}$) rounded to the nearest integer.
+
+Hint: 
+1. Break down the problem into smaller steps
+2. Consider mathematical properties that might simplify the solution
+3. Think about efficient algorithms to solve this type of problem
