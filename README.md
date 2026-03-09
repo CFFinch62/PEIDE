@@ -1,5 +1,7 @@
 # Project Euler Solutions Editor
 
+![Project Euler Editor Screenshot](images/Project_Euler.png)
+
 A comprehensive IDE designed specifically for solving and managing [Project Euler](https://projecteuler.net/) problems, with support for both basic (first 100 problems) and max (all available problems) modes.
 
 ## Features
