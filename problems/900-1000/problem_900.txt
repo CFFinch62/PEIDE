@@ -1,0 +1,8 @@
+Problem 900: [Title to be fetched]
+
+[Problem description to be fetched]
+
+Hint: 
+1. Break down the problem into smaller steps
+2. Consider mathematical properties that might simplify the solution
+3. Think about efficient algorithms to solve this type of problem

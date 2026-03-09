@@ -1,0 +1,5 @@
+{
+    "name": "Prime Factorization",
+    "description": "Find prime factors of a number",
+    "code": "def prime_factors(n):\n    \"\"\"\n    Find prime factors of a number.\n    Returns a dictionary of prime factors and their exponents.\n    \"\"\"\n    factors = {}\n    # Handle 2 separately\n    while n % 2 == 0:\n        factors[2] = factors.get(2, 0) + 1\n        n //= 2\n    \n    # Check odd numbers up to sqrt(n)\n    i = 3\n    while i * i <= n:\n        while n % i == 0:\n            factors[i] = factors.get(i, 0) + 1\n            n //= i\n        i += 2\n    \n    # If n is a prime > 2\n    if n > 2:\n        factors[n] = 1\n    \n    return factors\n"
+}

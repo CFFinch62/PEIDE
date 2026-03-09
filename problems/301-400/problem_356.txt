@@ -1,0 +1,8 @@
+Problem 356: Largest Roots of Cubic Polynomials
+
+Let $a_n$ be the largest real root of a polynomial $g(x) = x^3 - 2^n \cdot x^2 + n$. For example, $a_2 = 3.86619826\cdots$ Find the last eight digits of $\sum \limits_{i = 1}^{30} \lfloor a_i^{987654321} \rfloor$. Note: $\lfloor a \rfloor$ represents the floor function.
+
+Hint: 
+1. Break down the problem into smaller steps
+2. Consider mathematical properties that might simplify the solution
+3. Think about efficient algorithms to solve this type of problem

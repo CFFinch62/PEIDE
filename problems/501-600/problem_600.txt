@@ -1,0 +1,8 @@
+Problem 600: Integer Sided Equiangular Hexagons
+
+Let $H(n)$ be the number of distinct integer sided equiangular convex hexagons with perimeter not exceeding $n$. Hexagons are distinct if and only if they are not congruent. You are given $H(6) = 1$, $H(12) = 10$, $H(100) = 31248$. Find $H(55106)$. Equiangular hexagons with perimeter not exceeding $12$
+
+Hint: 
+1. Break down the problem into smaller steps
+2. Consider mathematical properties that might simplify the solution
+3. Think about efficient algorithms to solve this type of problem

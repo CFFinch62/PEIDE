@@ -1,0 +1,8 @@
+Problem 520: Simbers
+
+We define a simber to be a positive integer in which any odd digit, if present, occurs an odd number of times, and any even digit, if present, occurs an even number of times. For example, $141221242$ is a $9$-digit simber because it has three $1$'s, four $2$'s and two $4$'s. Let $Q(n)$ be the count of all simbers with at most $n$ digits. You are given $Q(7) = 287975$ and $Q(100) \bmod 1\,000\,000\,123 = 123864868$. Find $(\sum_{1 \le u \le 39} Q(2^u)) \bmod 1\,000\,000\,123$.
+
+Hint: 
+1. Break down the problem into smaller steps
+2. Consider mathematical properties that might simplify the solution
+3. Think about efficient algorithms to solve this type of problem

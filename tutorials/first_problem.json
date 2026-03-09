@@ -1,0 +1,29 @@
+{
+    "title": "Solving Your First Problem",
+    "steps": [
+        {
+            "title": "Select Problem",
+            "content": "Let's start with Problem 1. The system will load it for you.",
+            "action": "select_problem",
+            "params": {
+                "problem_number": 1
+            }
+        },
+        {
+            "title": "Write Your Solution",
+            "content": "Type your solution in the code editor. We'll highlight the important areas.",
+            "action": "highlight_areas",
+            "params": {
+                "areas": ["solution"]
+            }
+        },
+        {
+            "title": "Run Your Code",
+            "content": "Click the Run button to test your solution.",
+            "action": "highlight_areas",
+            "params": {
+                "areas": ["run_code"]
+            }
+        }
+    ]
+}

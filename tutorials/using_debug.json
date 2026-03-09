@@ -1,0 +1,79 @@
+{
+    "title": "Using the Debug Feature",
+    "steps": [
+        {
+            "title": "Introduction to Debugging",
+            "content": "The Project Euler Editor now includes a powerful debugging feature to help you track the execution of your code and find errors. This tutorial will show you how to use it effectively.",
+            "action": "none"
+        },
+        {
+            "title": "The Debug Panel",
+            "content": "The Debug Output panel is where all debugging information appears. You can find it in the tab bar alongside 'Solution', 'Helper Files', and 'Data Files'.\n\nClick on the 'Debug Output' tab to see it now.",
+            "action": "highlight_areas",
+            "params": {
+                "areas": [
+                    "debug_tab"
+                ]
+            }
+        },
+        {
+            "title": "Debug Controls",
+            "content": "The Debug Panel includes two important controls:\n\n1. **Enable Debug Output** checkbox - Turn all debugging on/off\n2. **Clear Debug Output** button - Remove all previous messages\n\nDebugging is enabled by default, but you can toggle it as needed.",
+            "action": "none"
+        },
+        {
+            "title": "Filtering Debug Levels",
+            "content": "You can selectively enable or disable different types of debug messages using the level checkboxes:\n\n- **Debug** - Regular debug messages (white)\n- **Important** - Critical information (orange)\n- **Info** - General information (green)\n- **Error** - Error messages (red)\n- **Detail** - Verbose details (gray)\n\nUncheck a level to hide those messages without affecting other levels.",
+            "action": "none"
+        },
+        {
+            "title": "Using the debug() Function",
+            "content": "The simplest way to debug is using the `debug()` function in your code:\n\n```python\ndef solve():\n    debug(\"Starting to solve the problem\")\n    # Your solution code here\n    return result\n```\n\nThis will display messages in the Debug Output panel.",
+            "action": "select_problem",
+            "params": {
+                "problem_number": 1
+            }
+        },
+        {
+            "title": "Debug Levels",
+            "content": "The debug function supports different message levels for better organization:\n\n```python\n# Regular debug message (white)\ndebug(\"This is a regular debug message\")\n\n# Important message (orange)\ndebug(\"This is important\", level=\"important\")\n\n# Informational message (green)\ndebug(\"Just FYI\", level=\"info\")\n\n# Detailed debug info (gray)\ndebug(\"Detailed value\", level=\"detail\")\n\n# Error message (red)\ndebug(\"Something went wrong\", level=\"error\")\n```",
+            "action": "none"
+        },
+        {
+            "title": "Tracking Variables",
+            "content": "A common debugging technique is to track variable values:\n\n```python\ndef solve():\n    n = 1000\n    debug(f\"Starting with n = {n}\")\n    \n    result = 0\n    for i in range(n):\n        if i % 100 == 0:\n            debug(f\"Processing i = {i}\", level=\"detail\")\n        if i % 3 == 0 or i % 5 == 0:\n            result += i\n    \n    debug(f\"Final result: {result}\", level=\"important\")\n    return result\n```",
+            "action": "none"
+        },
+        {
+            "title": "Managing Debug Output",
+            "content": "As your solution gets more complex, you may want to organize your debug output:\n\n1. Use different levels for different parts of your code\n2. Disable detail-level messages when you want to see only important information\n3. When digging into a specific part of your code, you might disable all levels except one\n4. Remember that your settings are saved between sessions",
+            "action": "none"
+        },
+        {
+            "title": "Standard Output Capture",
+            "content": "Regular `print()` statements also appear in the Debug Output panel. This means you can use either `debug()` or `print()` depending on your preference:\n\n```python\nprint(\"This will show in the debug panel\")\ndebug(\"So will this\")\n```\n\nThe advantage of `debug()` is the ability to use different levels and disable specific debug output.",
+            "action": "none"
+        },
+        {
+            "title": "Debugging Helper Functions",
+            "content": "When testing helper functions, debugging works the same way. Debug messages will appear in the Debug Output panel when you use the 'Test Helper Function' button.",
+            "action": "highlight_button",
+            "params": {
+                "button": "test_helper"
+            }
+        },
+        {
+            "title": "Running with Debug",
+            "content": "Let's try running some code with debug statements. The system will automatically switch to the Debug Output tab when code execution begins.",
+            "action": "highlight_button",
+            "params": {
+                "button": "run"
+            }
+        },
+        {
+            "title": "Debug Best Practices",
+            "content": "Here are some tips for effective debugging:\n\n1. Use different debug levels for better organization\n2. Include variable values in debug messages\n3. Filter levels to focus on what's important\n4. Add timestamps by checking execution time between debug calls\n5. Limit debug messages in loops to avoid overwhelming output\n6. Clear the debug panel before each major test run\n7. Disable debug when not needed for better performance",
+            "action": "none"
+        }
+    ]
+}

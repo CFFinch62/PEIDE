@@ -1,0 +1,5 @@
+{
+    "name": "Palindrome Checker",
+    "description": "Check if a number or string is a palindrome",
+    "code": "def is_palindrome(n):\n    \"\"\"\n    Check if a number or string is a palindrome.\n    \"\"\"\n    s = str(n)\n    return s == s[::-1]\n"
+}

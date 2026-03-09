@@ -1,0 +1,8 @@
+Problem 235: An Arithmetic Geometric Sequence
+
+Given is the arithmetic-geometric sequence $u(k) = (900-3k)r^{k - 1}$. Let $s(n) = \sum_{k = 1}^n u(k)$. Find the value of $r$ for which $s(5000) = -600\,000\,000\,000$. Give your answer rounded to $12$ places behind the decimal point.
+
+Hint: 
+1. Break down the problem into smaller steps
+2. Consider mathematical properties that might simplify the solution
+3. Think about efficient algorithms to solve this type of problem

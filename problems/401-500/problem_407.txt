@@ -1,0 +1,8 @@
+Problem 407: Idempotents
+
+If we calculate $a^2 \bmod 6$ for $0 \leq a \leq 5$ we get: $0,1,4,3,4,1$. The largest value of $a$ such that $a^2 \equiv a \bmod 6$ is $4$. Let's call $M(n)$ the largest value of $a \lt n$ such that $a^2 \equiv a \pmod n$. So $M(6) = 4$. Find $\sum M(n)$ for $1 \leq n \leq 10^7$.
+
+Hint: 
+1. Break down the problem into smaller steps
+2. Consider mathematical properties that might simplify the solution
+3. Think about efficient algorithms to solve this type of problem

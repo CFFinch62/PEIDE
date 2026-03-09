@@ -1,0 +1,8 @@
+Problem 936: Peerless Trees
+
+A peerless tree is a tree with no edge between two vertices of the same degree. Let $P(n)$ be the number of peerless trees on $n$ unlabelled vertices. There are six of these trees on seven unlabelled vertices, $P(7)=6$, shown below. Define $\displaystyle S(N) = \sum_{n=3}^N P(n)$. You are given $S(10) = 74$. Find $S(50)$.
+
+Hint: 
+1. Break down the problem into smaller steps
+2. Consider mathematical properties that might simplify the solution
+3. Think about efficient algorithms to solve this type of problem

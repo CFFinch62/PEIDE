@@ -1,0 +1,8 @@
+Problem 258: A Lagged Fibonacci Sequence
+
+A sequence is defined as: $g_k = 1$, for $0 \le k \le 1999$ $g_k = g_{k-2000} + g_{k - 1999}$, for $k \ge 2000$. Find $g_k \bmod 20092010$ for $k = 10^{18}$.
+
+Hint: 
+1. Break down the problem into smaller steps
+2. Consider mathematical properties that might simplify the solution
+3. Think about efficient algorithms to solve this type of problem

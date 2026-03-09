@@ -1,0 +1,8 @@
+Problem 914: Triangles inside Circles
+
+For a given integer $R$ consider all primitive Pythagorean triangles that can fit inside, without touching, a circle with radius $R$. Define $F(R)$ to be the largest inradius of those triangles. You are given $F(100) = 36$. Find $F(10^{18})$.
+
+Hint: 
+1. Break down the problem into smaller steps
+2. Consider mathematical properties that might simplify the solution
+3. Think about efficient algorithms to solve this type of problem
