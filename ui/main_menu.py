@@ -74,13 +74,26 @@ class MainMenuBuilder:
         self.mode_menu.addAction(self.basic_mode_action)
 
         # Max mode action
-        self.max_mode_action = QAction("Max (All 945 Problems)", self.main_window)
+        self.max_mode_action = QAction(self.main_window)
         self.max_mode_action.setCheckable(True)
         self.max_mode_action.triggered.connect(lambda: self.main_window.set_problem_mode("max"))
         self.mode_menu.addAction(self.max_mode_action)
+        self.update_max_mode_label()
+
+        self.mode_menu.addSeparator()
+
+        # Download problems added to projecteuler.net since the last update
+        self.download_problems_action = QAction("Download New Problems...", self.main_window)
+        self.download_problems_action.triggered.connect(self.main_window.download_new_problems)
+        self.mode_menu.addAction(self.download_problems_action)
 
         # Set default selection
         self.basic_mode_action.setChecked(True)
+
+    def update_max_mode_label(self):
+        """Show the number of available problems on the Max mode action."""
+        total = self.main_window.problem_manager.max_problem_limit
+        self.max_mode_action.setText(f"Max (All {total} Problems)")
 
     def _create_theme_menu(self):
         """Create the Theme menu with its actions."""

@@ -1,14 +1,14 @@
 Problem 77: Prime Summations
 
-It is possible to write ten as the sum of primes in exactly five different ways:
-
-7 + 3
-5 + 5
-5 + 3 + 2
-3 + 3 + 2 + 2
-2 + 2 + 2 + 2 + 2
-
-What is the first value which can be written as the sum of primes in over five thousand different ways?
+<p>It is possible to write ten as the sum of primes in exactly five different ways:</p>
+$$\begin{align}
+&amp;7 + 3\\
+&amp;5 + 5\\
+&amp;5 + 3 + 2\\
+&amp;3 + 3 + 2 + 2\\
+&amp;2 + 2 + 2 + 2 + 2
+\end{align}$$
+<p>What is the first value which can be written as the sum of primes in over five thousand different ways?</p>
 
 Hint:
 1. We need to find the smallest number with over 5000 prime sum combinations
@@ -28,4 +28,4 @@ Hint:
    - Only use prime numbers
    - Need over 5000 combinations
    - Consider order of combinations
-   - Use efficient prime generation 
+   - Use efficient prime generation

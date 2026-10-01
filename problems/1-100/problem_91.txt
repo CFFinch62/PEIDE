@@ -1,14 +1,16 @@
 Problem 91: Right Triangles with Integer Coordinates
 
-The points P (x₁, y₁) and Q (x₂, y₂) are plotted at integer co-ordinates and are joined to the origin, O(0,0), to form ΔOPQ.
+<p>The points $P(x_1, y_1)$ and $Q(x_2, y_2)$ are plotted at integer co-ordinates and are joined to the origin, $O(0,0)$, to form $\triangle OPQ$.</p>
 
-[Diagram showing points P, Q, and O forming a triangle]
+<div class="center">
+<img src="resources/images/0091_1.png" class="dark_img" alt=""><br></div>
 
-There are exactly fourteen triangles containing a right angle that can be formed when each co-ordinate lies between 0 and 2 inclusive; that is, 0 ≤ x₁, y₁, x₂, y₂ ≤ 2.
+<p>There are exactly fourteen triangles containing a right angle that can be formed when each co-ordinate lies between $0$ and $2$ inclusive; that is, $0 \le x_1, y_1, x_2, y_2 \le 2$.</p>
 
-[Diagram showing all 14 right triangles]
+<div class="center">
+<img src="resources/images/0091_2.png" alt=""><br></div>
 
-Given that 0 ≤ x₁, y₁, x₂, y₂ ≤ 50, how many right triangles can be formed?
+<p>Given that $0 \le x_1, y_1, x_2, y_2 \le 50$, how many right triangles can be formed?</p>
 
 Hint:
 1. We need to count right triangles formed with integer coordinates
@@ -28,4 +30,4 @@ Hint:
    - Points must be distinct
    - Right angle can be at any vertex
    - Consider coordinate bounds
-   - Handle special cases 
+   - Handle special cases

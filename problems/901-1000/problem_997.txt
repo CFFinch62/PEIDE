@@ -1,0 +1,19 @@
+Problem 997: Dice Box
+
+<p>
+There are $xyz$ dice arranged in an $x \times y \times z$ box such that touching faces have the same value.<br>
+All dice are indistinguishable up to rotations.</p>
+
+<p>
+Let $f(x, y, z)$ be the number of possible arrangements.</p>
+
+<p>
+You are given $f(1, 1, 1)=24$ and $f(2, 3 , 4)=18432$.</p>
+
+<p>
+Find $f(9,10,11)$.</p>
+
+Hint:
+1. Break down the problem into smaller steps
+2. Consider mathematical properties that might simplify the solution
+3. Think about efficient algorithms to solve this type of problem

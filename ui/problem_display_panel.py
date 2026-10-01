@@ -3,14 +3,26 @@ from PyQt6.QtCore import pyqtSignal, Qt, QUrl
 from PyQt6.QtGui import QDesktopServices, QIcon, QColor
 import os
 
-from ui.problem_renderer import build_page, mathjax_base_url
+from ui.problem_renderer import build_page, page_base_url, text_to_html, PROBLEMS_DIR
 
 try:
     from PyQt6.QtWebEngineWidgets import QWebEngineView
+    from PyQt6.QtWebEngineCore import QWebEnginePage
     WEBENGINE_AVAILABLE = True
 except ImportError:
     # Without QtWebEngine, fall back to plain text (math is shown as raw TeX)
     WEBENGINE_AVAILABLE = False
+
+
+if WEBENGINE_AVAILABLE:
+    class ProblemPage(QWebEnginePage):
+        """Opens clicked links (data files, other problems) in the web browser."""
+
+        def acceptNavigationRequest(self, url, nav_type, is_main_frame):
+            if nav_type == QWebEnginePage.NavigationType.NavigationTypeLinkClicked:
+                QDesktopServices.openUrl(url)
+                return False
+            return super().acceptNavigationRequest(url, nav_type, is_main_frame)
 
 
 class ProblemTextView(QWidget):
@@ -28,11 +40,13 @@ class ProblemTextView(QWidget):
 
         if WEBENGINE_AVAILABLE:
             self.view = QWebEngineView()
+            self.view.setPage(ProblemPage(self.view))
             self.view.page().setBackgroundColor(QColor("#000000"))
             self.view.setContextMenuPolicy(Qt.ContextMenuPolicy.NoContextMenu)
         else:
             self.view = QTextEdit()
             self.view.setReadOnly(True)
+            self.view.document().setBaseUrl(QUrl.fromLocalFile(PROBLEMS_DIR + os.sep))
             self._apply_text_edit_style()
         layout.addWidget(self.view)
 
@@ -55,9 +69,9 @@ class ProblemTextView(QWidget):
         if WEBENGINE_AVAILABLE:
             page = build_page(self._text, font_size=self.font_size,
                               padding=self.padding, highlight=self._highlight)
-            self.view.setHtml(page, mathjax_base_url())
+            self.view.setHtml(page, page_base_url())
         else:
-            self.view.setPlainText(self._text)
+            self.view.setHtml(text_to_html(self._text))
 
     def setPlainText(self, text):
         """Display the given problem text (TeX math is typeset if possible)."""

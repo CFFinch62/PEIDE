@@ -1,8 +1,7 @@
 Problem 52: Permuted Multiples
 
-It can be seen that the number, 125874, and its double, 251748, contain exactly the same digits, but in a different order.
-
-Find the smallest positive integer, x, such that 2x, 3x, 4x, 5x, and 6x, contain the same digits.
+<p>It can be seen that the number, $125874$, and its double, $251748$, contain exactly the same digits, but in a different order.</p>
+<p>Find the smallest positive integer, $x$, such that $2x$, $3x$, $4x$, $5x$, and $6x$, contain the same digits.</p>
 
 Hint:
 1. We need to find the smallest number x where x, 2x, 3x, 4x, 5x, and 6x are all permutations of each other
@@ -21,4 +20,4 @@ Hint:
 5. Key points:
    - All multiples must have the same digits as the original number
    - The digits can be in any order
-   - We want the smallest such number 
+   - We want the smallest such number

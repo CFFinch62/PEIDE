@@ -22,8 +22,8 @@ class ProblemManager:
         
         # Track current problem mode (basic or max)
         self.current_mode = "basic"
-        self.max_problem_limit = 945  # Maximum problem number for Max mode
         self.basic_problem_limit = 100  # Maximum problem number for Basic mode
+        self.max_problem_limit = self.find_max_problem_number()  # Highest problem for Max mode
 
         # Map of problems to their required data files and loading methods
         self.problem_data_files = {
@@ -175,6 +175,19 @@ class ProblemManager:
         self.load_problem_files()
         self.load_solution_files()
         self.load_data_files()
+
+    def find_max_problem_number(self):
+        """Return the highest problem number that has a problem file."""
+        highest = 0
+        if os.path.isdir(self.problems_dir):
+            for dirname in os.listdir(self.problems_dir):
+                subdir = os.path.join(self.problems_dir, dirname)
+                if re.match(r'\d+-\d+$', dirname) and os.path.isdir(subdir):
+                    for filename in os.listdir(subdir):
+                        match = re.match(r'problem_(\d+)\.txt$', filename)
+                        if match:
+                            highest = max(highest, int(match.group(1)))
+        return highest or self.basic_problem_limit
 
     def _load_progress(self):
         """Load user progress from JSON file."""
@@ -797,7 +810,7 @@ class ProblemManager:
                     "hints": ""
                 }
             
-            with open(file_path, "r") as f:
+            with open(file_path, "r", encoding="utf-8") as f:
                 content = f.read()
 
                 # Split content into problem text and hints

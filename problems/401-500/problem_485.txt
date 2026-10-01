@@ -1,6 +1,16 @@
 Problem 485: Maximum Number of Divisors
 
-Let $d(n)$ be the number of divisors of $n$. Let $M(n,k)$ be the maximum value of $d(j)$ for $n \le j \le n+k-1$. Let $S(u,k)$ be the sum of $M(n,k)$ for $1 \le n \le u-k+1$. You are given that $S(1000,10)=17176$. Find $S(100\,000\,000, 100\,000)$.
+<p>
+Let $d(n)$ be the number of divisors of $n$.<br>
+Let $M(n,k)$ be the maximum value of $d(j)$ for $n \le j \le n+k-1$.<br>
+Let $S(u,k)$ be the sum of $M(n,k)$ for $1 \le n \le u-k+1$.
+</p>
+<p>
+You are given that $S(1000,10)=17176$.
+</p>
+<p>
+Find $S(100\,000\,000, 100\,000)$.
+</p>
 
 Hint: 
 1. Break down the problem into smaller steps

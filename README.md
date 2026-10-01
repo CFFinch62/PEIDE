@@ -67,7 +67,8 @@ If you prefer to run the application from source code instead of using the pre-b
 - `theme_manager.py`: Handles application theming
 - `ui/`: UI components including code editor and panels
 - `dialogs/`: Application dialogs
-- `problems/`: Problem descriptions and metadata
+- `problems/`: Problem descriptions (HTML from projecteuler.net, with images in `problems/resources/`) and metadata
+- `tools/import_problems.py`: Re-downloads problem descriptions from projecteuler.net (`python tools/import_problems.py --help`)
 - `solutions/`: Saved solutions
 - `helpers/`: Helper modules for problem solving
 - `templates/`: Code templates

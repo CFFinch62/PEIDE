@@ -1,6 +1,6 @@
 Problem 172: Few Repeated Digits
 
-How many $18$-digit numbers $n$ (without leading zeros) are there such that no digit occurs more than three times in $n$?
+<p>How many $18$-digit numbers $n$ (without leading zeros) are there such that no digit occurs more than three times in $n$?</p>
 
 Hint: 
 1. Break down the problem into smaller steps

@@ -1,8 +1,7 @@
 Problem 41: Pandigital Prime
 
-We shall say that an n-digit number is pandigital if it makes use of all the digits 1 to n exactly once. For example, 2143 is a 4-digit pandigital and is also prime.
-
-What is the largest n-digit pandigital prime that exists?
+<p>We shall say that an $n$-digit number is pandigital if it makes use of all the digits $1$ to $n$ exactly once. For example, $2143$ is a $4$-digit pandigital and is also prime.</p>
+<p>What is the largest $n$-digit pandigital prime that exists?</p>
 
 Hint:
 1. A number is pandigital if it uses each digit from 1 to n exactly once
@@ -20,4 +19,4 @@ Hint:
 5. Optimization:
    - Use a sieve to pre-compute primes up to the maximum possible value
    - Generate permutations in descending order to find the largest prime faster
-   - Skip even numbers and numbers ending in 5 
+   - Skip even numbers and numbers ending in 5

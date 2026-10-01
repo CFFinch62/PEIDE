@@ -1,6 +1,15 @@
 Problem 867: Tiling Dodecagon
 
-There are 5 ways to tile a regular dodecagon of side 1 with regular polygons of side 1. Let $T(n)$ be the number of ways to tile a regular dodecagon of side $n$ with regular polygons of side 1. Then $T(1) = 5$. You are also given $T(2) = 48$. Find $T(10)$. Give your answer modulo $10^9+7$.
+<p>
+There are $5$ ways to tile a regular dodecagon of side $1$ with regular polygons of side $1$.</p>
+
+<img src="resources/images/0867_DodecaDiagram.jpg" alt="0867_DodecaDiagram.jpg">
+
+<p>
+Let $T(n)$ be the number of ways to tile a regular dodecagon of side $n$ with regular polygons of side $1$. Then $T(1) = 5$. You are also given $T(2) = 48$.</p>
+
+<p>
+Find $T(10)$. Give your answer modulo $10^9+7$.</p>
 
 Hint: 
 1. Break down the problem into smaller steps

@@ -1,0 +1,16 @@
+Problem 991: Fruit Salad
+
+<p>Find the sum of $\unicode{x1F34E} + \unicode{x1F34C} + \unicode{x1F34D}$ for all triples of positive integers $\unicode{x1F34E}, \unicode{x1F34C}, \unicode{x1F34D}$ which satisfy</p>
+
+$$\frac {\unicode{x1F34E}} {\unicode{x1F34C} + \unicode{x1F34D}} +
+\frac {\unicode{x1F34C}} {\unicode{x1F34D} + \unicode{x1F34E}} +
+\frac {\unicode{x1F34D}} {\unicode{x1F34E} + \unicode{x1F34D}} = 4$$
+
+<p>and $\unicode{x1F34E} + \unicode{x1F34C} + \unicode{x1F34D} \le 10^7$.</p>
+
+<p>In case your device cannot display emoji properly, <a href="https://projecteuler.net/resources/images/0991_fruits.png">here</a> is a rendered image of the problem statement.</p>
+
+Hint:
+1. Break down the problem into smaller steps
+2. Consider mathematical properties that might simplify the solution
+3. Think about efficient algorithms to solve this type of problem

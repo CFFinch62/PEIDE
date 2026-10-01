@@ -1,6 +1,9 @@
 Problem 897: Maximal $n$-gon in a region
 
-Let $G(n)$ denote the largest possible area of an $n$-gona polygon with $n$ sides contained in the region $\{(x, y) \in \Bbb R^2: x^4 \leq y \leq 1\}$. For example, $G(3) = 1$ and $G(5)\approx 1.477309771$. Find $G(101)$ rounded to nine digits after the decimal point.
+<p>
+Let $G(n)$ denote the largest possible area of an <strong class="tooltip">$n$-gon<span class="tooltiptext">a polygon with $n$ sides</span></strong> contained in the region $\{(x, y) \in \Bbb R^2: x^4 \leq y \leq 1\}$.<br>
+For example, $G(3) = 1$ and $G(5)\approx 1.477309771$.<br>
+Find $G(101)$ rounded to nine digits after the decimal point.</p>
 
 Hint: 
 1. Break down the problem into smaller steps

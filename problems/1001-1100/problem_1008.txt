@@ -1,0 +1,15 @@
+Problem 1008: Functional Inverse
+
+<p>
+Define the <i>$(N,M)$-functional inverse of $x^2$</i> to be the monic polynomial $Q(x)$ of degree $N+1$ such that $Q(n^2) \equiv n \pmod M$ for all integers $0 \le n \le N$ and all coefficients are non-negative and smaller than $M$.</p>
+
+<p>
+For example, the $(2, 7)$-functional inverse of $x^2$ is $x^3 + 3x^2 + 4x$.</p>
+
+<p>
+Find the coefficient of $x^{10}$ in the $(10^7, 10^9+7)$-functional inverse of $x^2$.</p>
+
+Hint:
+1. Break down the problem into smaller steps
+2. Consider mathematical properties that might simplify the solution
+3. Think about efficient algorithms to solve this type of problem

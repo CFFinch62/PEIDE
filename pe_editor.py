@@ -28,6 +28,7 @@ from ui.code_editor import CodeEditor
 from ui.syntax_highlighter import PythonHighlighter
 from ui.main_menu import MainMenuBuilder
 from ui.data_file_panel import DataFilePanel
+from ui.problem_downloader import ProblemDownloadThread
 from ui.helper_files_panel import HelperFilesPanel
 from ui.templates_panel import TemplatesPanel
 from ui.problem_display_panel import ProblemDisplayPanel
@@ -1225,8 +1226,49 @@ class MainWindow(QMainWindow):
         self.update_button_visibility()
 
         # Show confirmation message
-        max_problems = 945 if mode == 'max' else 100
+        max_problems = self.problem_manager.max_problem_limit if mode == 'max' else 100
         self.show_status_message(f"Switched to {mode} mode ({max_problems} problems available)", 3000)
+
+    def download_new_problems(self):
+        """Download problems added to projecteuler.net since the last update."""
+        if getattr(self, '_download_thread', None) and self._download_thread.isRunning():
+            return
+
+        self.menu_builder.download_problems_action.setEnabled(False)
+        self.show_status_message("Checking projecteuler.net for new problems...")
+
+        self._download_thread = ProblemDownloadThread(self.problem_manager.problems_dir, self)
+        self._download_thread.progress.connect(
+            lambda message: self.show_status_message(f"Downloading {message}"))
+        self._download_thread.finished.connect(self._new_problems_downloaded)
+        self._download_thread.start()
+
+    def _new_problems_downloaded(self):
+        """Make downloaded problems available and report the result."""
+        thread = self._download_thread
+        self.menu_builder.download_problems_action.setEnabled(True)
+        self.status_bar.clearMessage()
+
+        if thread.error:
+            QMessageBox.warning(self, "Download New Problems",
+                                f"Could not download problems from projecteuler.net:\n{thread.error}")
+            return
+
+        if thread.imported:
+            self.problem_manager.max_problem_limit = self.problem_manager.find_max_problem_number()
+            self.problem_manager.load_problem_files()
+            self.progress_grid.set_total_problems(self.problem_manager.max_problem_limit)
+            self.update_progress()
+            self.menu_builder.update_max_mode_label()
+            message = (f"Downloaded {len(thread.imported)} new problem(s): "
+                       f"{min(thread.imported)}-{max(thread.imported)}.")
+            if self.current_mode != 'max':
+                message += "\n\nSwitch to Max mode to see them."
+        else:
+            message = "You already have all the problems."
+        if thread.failed:
+            message += f"\n\nThese problems could not be downloaded: {', '.join(map(str, thread.failed))}"
+        QMessageBox.information(self, "Download New Problems", message)
 
     def update_mode_indicator(self):
         """Update the mode indicator label in the status bar."""

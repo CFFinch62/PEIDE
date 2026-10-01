@@ -1,8 +1,7 @@
 Problem 48: Self Powers
 
-The series, 1¹ + 2² + 3³ + ... + 10¹⁰ = 10405071317.
-
-Find the last ten digits of the series, 1¹ + 2² + 3³ + ... + 1000¹⁰⁰⁰.
+<p>The series, $1^1 + 2^2 + 3^3 + \cdots + 10^{10} = 10405071317$.</p>
+<p>Find the last ten digits of the series, $1^1 + 2^2 + 3^3 + \cdots + 1000^{1000}$.</p>
 
 Hint:
 1. We need to calculate the sum of n^n for n from 1 to 1000 and find the last 10 digits
@@ -20,4 +19,4 @@ Hint:
 5. Key points:
    - Need to handle very large numbers efficiently
    - Only the last 10 digits matter
-   - Can use modular arithmetic to simplify calculations 
+   - Can use modular arithmetic to simplify calculations

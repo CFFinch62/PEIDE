@@ -1,6 +1,44 @@
 Problem 480: The Last Question
 
-Consider all the words which can be formed by selecting letters, in any order, from the phrase: thereisasyetinsufficientdataforameaningfulanswer Suppose those with 15 letters or less are listed in alphabetical order and numbered sequentially starting at 1. The list would include: 1 : a 2 : aa 3 : aaa 4 : aaaa 5 : aaaaa 6 : aaaaaa 7 : aaaaaac 8 : aaaaaacd 9 : aaaaaacde 10 : aaaaaacdee 11 : aaaaaacdeee 12 : aaaaaacdeeee 13 : aaaaaacdeeeee 14 : aaaaaacdeeeeee 15 : aaaaaacdeeeeeef 16 : aaaaaacdeeeeeeg 17 : aaaaaacdeeeeeeh ... 28 : aaaaaacdeeeeeey 29 : aaaaaacdeeeeef 30 : aaaaaacdeeeeefe ... 115246685191495242: euleoywuttttsss 115246685191495243: euler 115246685191495244: eulera ... 525069350231428029: ywuuttttssssrrrDefine P(w) as the position of the word w. Define W(p) as the word in position p. We can see that P(w) and W(p) are inverses: P(W(p)) = p and W(P(w)) = w. Examples: W(10) = aaaaaacdee P(aaaaaacdee) = 10 W(115246685191495243) = euler P(euler) = 115246685191495243Find W(P(legionary) + P(calorimeters) - P(annihilate) + P(orchestrated) - P(fluttering)). Give your answer using lowercase characters (no punctuation or space).
+<p>Consider all the words which can be formed by selecting letters, in any order, from the phrase:</p>
+<p></p><div class="center"><b>thereisasyetinsufficientdataforameaningfulanswer</b></div>
+<p>Suppose those with 15 letters or less are listed in <b>alphabetical order</b> and numbered sequentially starting at 1.<br>
+The list would include:</p>
+<ul style="list-style-type:none;"><li>1 : a</li>
+<li>2 : aa</li>
+<li>3 : aaa</li>
+<li>4 : aaaa</li>
+<li>5 : aaaaa</li>
+<li>6 : aaaaaa</li>
+<li>7 : aaaaaac</li>
+<li>8 : aaaaaacd</li>
+<li>9 : aaaaaacde</li>
+<li>10 : aaaaaacdee</li>
+<li>11 : aaaaaacdeee</li>
+<li>12 : aaaaaacdeeee</li>
+<li>13 : aaaaaacdeeeee</li>
+<li>14 : aaaaaacdeeeeee</li>
+<li>15 : aaaaaacdeeeeeef</li>
+<li>16 : aaaaaacdeeeeeeg</li>
+<li>17 : aaaaaacdeeeeeeh</li>
+<li>...</li>
+<li>28 : aaaaaacdeeeeeey</li>
+<li>29 : aaaaaacdeeeeef</li>
+<li>30 : aaaaaacdeeeeefe</li>
+<li>...</li>
+<li>115246685191495242: euleoywuttttsss</li>
+<li>115246685191495243: euler</li>
+<li>115246685191495244: eulera</li>
+<li>...</li>
+<li>525069350231428029: ywuuttttssssrrr</li></ul><p>Define <var>P</var>(<var>w</var>) as the position of the word <var>w</var>.<br>
+Define <var>W</var>(<var>p</var>) as the word in position <var>p</var>.<br>
+We can see that <var>P</var>(<var>w</var>) and <var>W</var>(<var>p</var>) are inverses: <var>P</var>(<var>W</var>(<var>p</var>)) = <var>p</var> and <var>W</var>(<var>P</var>(<var>w</var>)) = <var>w</var>.</p>
+<p>Examples:</p>
+<ul style="list-style-type:none;"><li><var>W</var>(10) = aaaaaacdee</li>
+<li><var>P</var>(aaaaaacdee) = 10</li>
+<li><var>W</var>(115246685191495243) = euler</li>
+<li><var>P</var>(euler) = 115246685191495243</li></ul><p>Find <var>W</var>(<var>P</var>(legionary) + <var>P</var>(calorimeters) - <var>P</var>(annihilate) + <var>P</var>(orchestrated) - <var>P</var>(fluttering)).<br>
+Give your answer using lowercase characters (no punctuation or space).</p>
 
 Hint: 
 1. Break down the problem into smaller steps

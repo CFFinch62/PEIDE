@@ -1,8 +1,7 @@
 Problem 63: Powerful Digit Counts
 
-The 5-digit number, 16807=7⁵, is also a fifth power. Similarly, the 9-digit number, 134217728=8⁹, is a ninth power.
-
-How many n-digit positive integers exist which are also an nth power?
+<p>The $5$-digit number, $16807=7^5$, is also a fifth power. Similarly, the $9$-digit number, $134217728=8^9$, is a ninth power.</p>
+<p>How many $n$-digit positive integers exist which are also an $n$th power?</p>
 
 Hint:
 1. We need to count numbers that have the same number of digits as their power
@@ -21,4 +20,4 @@ Hint:
    - Need to handle large numbers
    - Number of digits must equal the power
    - Consider the relationship between base size and digit count
-   - Base 10 and higher can't work (too many digits) 
+   - Base 10 and higher can't work (too many digits)

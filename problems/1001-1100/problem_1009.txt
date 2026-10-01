@@ -1,0 +1,18 @@
+Problem 1009: A Change of Base
+
+<p>
+For integers $b &gt; a &gt; 1$ define $F(a,b)$ to be the largest integer $n$ such that when $n$ is expressed in base $a$ the result is identical to the result when $2n$ is expressed in base $b$. If there is no such integer then $F(a,b) = 0$.</p>
+
+<p>
+For example, $53 = 1222_3$ and $2\times 53 = 106 = 1222_4$. In addition there is no other integer $n$ that has this property. Hence $F(3,4) = 53$. Also you are given $F(9,10) = 8152650$.</p>
+
+<p>
+Define $\displaystyle G(a) = \sum_{b=a+1}^{\infty} F(a,b)$. It can be shown that $G(a)$ is always finite. For example $G(3) = 72$ because the only non zero values are $F(3,4) = 53, F(3,6) = 6, F(3,7) = 8, F(3,8) = 5$.</p>
+
+<p>
+Find $\displaystyle \sum_{a=2}^{20} G(a)$.</p>
+
+Hint:
+1. Break down the problem into smaller steps
+2. Consider mathematical properties that might simplify the solution
+3. Think about efficient algorithms to solve this type of problem

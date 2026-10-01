@@ -14,7 +14,7 @@ class ProblemGrid(QWidget):
         self.problem_manager = problem_manager  # Store the problem manager
         self.mode = "basic"  # Default to basic mode (1-100)
         self.max_problem = 100  # Default max problem is 100 for basic mode
-        self.max_total_problems = 945  # Total number of problems available
+        self.max_total_problems = problem_manager.max_problem_limit  # Total number of problems available
         self.current_group = 1  # Current group (1 = problems 1-100, 2 = problems 101-200, etc.)
         self.setup_ui()
         
@@ -177,6 +177,13 @@ class ProblemGrid(QWidget):
         
         # Connect click event
         square.mousePressEvent = lambda event, pn=problem_number: self.square_clicked(pn)
+
+    def set_total_problems(self, total):
+        """Update the number of available problems (after new ones are downloaded)."""
+        self.max_total_problems = total
+        if self.mode == "max":
+            self.max_problem = total
+        self.create_grid()
 
     def set_mode(self, mode):
         """Set the grid mode (basic or max) and update the UI."""

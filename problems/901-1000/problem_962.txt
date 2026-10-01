@@ -1,0 +1,16 @@
+Problem 962: Angular Bisector and Tangent 2
+
+<p>
+Given is an integer sided triangle $ABC$ with $BC \le AC \le AB$.<br>$k$ is the angular bisector of angle $ACB$.<br>$m$ is the tangent at $C$ to the circumscribed circle of $ABC$.<br>$n$ is a line parallel to $m$ through $B$.<br>
+The intersection of $n$ and $k$ is called $E$.
+</p>
+<div align="center"><img src="resources/images/0296_bisector.gif" class="dark_img" alt="0296_bisector.gif"></div>
+<p>
+How many triangles $ABC$ with a perimeter not exceeding $1\,000\,000$ exist such that $CE$ has integral length?</p>
+
+<p class="note"><b>Note</b>: This problem is a more difficult version of <a href="https://projecteuler.net/problem=296">Problem 296</a>. Please pay close attention to the differences between the two statements.</p>
+
+Hint:
+1. Break down the problem into smaller steps
+2. Consider mathematical properties that might simplify the solution
+3. Think about efficient algorithms to solve this type of problem

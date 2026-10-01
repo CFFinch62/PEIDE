@@ -1,0 +1,22 @@
+Problem 1011: Modified Euclidean Algorithm
+
+<p>
+In a modified Euclidean algorithm for two numbers $a, b$, at each step we perform <strong>Euclidean division</strong> of the larger number by the smaller number and then replace the larger number with the integer <b>quotient</b> (rather than the <b>remainder</b>, as in the normal Euclidean algorithm).<br>
+This operation is repeatedly performed until one of the two numbers becomes $1$; when this happens, the value of the other number is denoted $f(a, b)$.</p>
+
+<p>
+For example, $f(123, 456) = 3$ as shown below:
+$$(123, 456) \to (123, 3) \to (41, 3) \to (13, 3) \to (4, 3) \to (1, 3) \mapsto 3.$$
+</p>
+
+<p>
+Let $E(N)$ be the sum $\sum\limits_{1 \le a, b \lt N} f(a, b)$.<br>
+You are given $E(10) = 343$ and $E(100) = 269288$.</p>
+
+<p>
+Find $E(3\,000\,000)$.</p>
+
+Hint:
+1. Break down the problem into smaller steps
+2. Consider mathematical properties that might simplify the solution
+3. Think about efficient algorithms to solve this type of problem
