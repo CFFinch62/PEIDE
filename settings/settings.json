@@ -67,5 +67,6 @@
             "trace": true
         },
         "show_timestamps": true
-    }
+    },
+    "problem_mode": "max"
 }
