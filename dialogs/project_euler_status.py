@@ -48,14 +48,12 @@ class ProjectEulerStatusDialog(QDialog):
         self.username_value = QLabel("-")
         self.country_value = QLabel("-")  # Will keep the variable name but update the label text
         self.language_value = QLabel("-")
-        self.solved_value = QLabel("-")
-        self.level_value = QLabel("-")
+        self.rank_value = QLabel("-")
         
         profile_layout.addRow("Username:", self.username_value)
         profile_layout.addRow("Location:", self.country_value)  # Changed from "Country:" to "Location:"
         profile_layout.addRow("Language:", self.language_value)
-        profile_layout.addRow("Problems Solved:", self.solved_value)
-        profile_layout.addRow("Level:", self.level_value)
+        profile_layout.addRow("Rank:", self.rank_value)
         
         profile_group.setLayout(profile_layout)
         layout.addWidget(profile_group)
@@ -131,11 +129,10 @@ class ProjectEulerStatusDialog(QDialog):
                 username_elem = root.find("username")
                 location_elem = root.find("location")  # API uses 'location' not 'country'
                 language_elem = root.find("language")
-                solved_elem = root.find("solved")
-                level_elem = root.find("level")
+                rank_elem = root.find("rank")
                 
                 # Check if all required elements exist
-                if None in [username_elem, location_elem, language_elem, solved_elem, level_elem]:
+                if None in [username_elem, location_elem, language_elem, rank_elem]:
                     # Log the actual XML for debugging
                     print(f"Incomplete XML response: {response.text}")
                     
@@ -149,20 +146,18 @@ class ProjectEulerStatusDialog(QDialog):
                 username_value = username_elem.text
                 location_value = location_elem.text  # Now using location instead of country
                 language_value = language_elem.text
-                solved_value = solved_elem.text
-                level_value = level_elem.text
+                rank_value = rank_elem.text
                 
                 # Handle special cases (like "Administrator")
-                if solved_value and not solved_value.isdigit():
+                if rank_value and not rank_value.isdigit():
                     # Special value like "Administrator" - display as is
-                    print(f"Special solved value for user {username}: {solved_value}")
+                    print(f"Special rank value for user {username}: {rank_value}")
                 
                 # Update profile information
                 self.username_value.setText(username_value)
                 self.country_value.setText(location_value)  # Display location in the country field
                 self.language_value.setText(language_value)
-                self.solved_value.setText(solved_value)
-                self.level_value.setText(level_value)
+                self.rank_value.setText(rank_value)
                 
                 # Fetch and display banner
                 self.fetch_banner(username)
