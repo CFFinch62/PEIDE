@@ -1335,6 +1335,10 @@ class MainWindow(QMainWindow):
             pass
 
 if __name__ == '__main__':
+    # progress.json, problems/, solutions/ etc. are found relative to the app's
+    # folder, so make it the working directory however the app was started
+    os.chdir(os.path.dirname(os.path.abspath(__file__)))
+
     # Required by QtWebEngine (used to typeset problem math) before the app is created
     QApplication.setAttribute(Qt.ApplicationAttribute.AA_ShareOpenGLContexts)
     app = QApplication(sys.argv)
