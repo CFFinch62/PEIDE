@@ -25,6 +25,8 @@ data_dirs = [
     ('ui', 'ui'),
     # Offline MathJax used to typeset the math in problem descriptions
     ('mathjax', 'mathjax'),
+    # Window icon
+    ('PEIDE.png', '.'),
     # Also include the progress.json if it's there
     ('progress.json', '.'),
 ]
