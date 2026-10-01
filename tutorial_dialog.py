@@ -288,24 +288,7 @@ class TutorialDialog(QDialog):
                     self.highlighted_elements.append("progress_grid_squares")
                 elif area_name == "problem_description" and hasattr(self.main_window, 'problem_display'):
                     # For problem description, make the text bold and yellow
-                    problem_description = self.main_window.problem_display.problem_description
-
-                    # Store the original text and style
-                    self.original_styles["problem_description_text"] = problem_description.toPlainText()
-                    self.original_styles["problem_description_style"] = problem_description.styleSheet()
-
-                    # Apply bold yellow style to the text
-                    problem_description.setStyleSheet("""
-                        QTextEdit {
-                            color: #FFD700;
-                            font-weight: bold;
-                            background-color: #000000;
-                            border: none;
-                            padding: 10px;
-                            font-family: Arial;
-                            font-size: 12pt;
-                        }
-                    """)
+                    self.main_window.problem_display.set_highlight(True)
 
                     # Add to highlighted elements
                     self.highlighted_elements.append("problem_description_text")
@@ -515,9 +498,8 @@ class TutorialDialog(QDialog):
 
             # Check if it's the problem description text
             if element_name == "problem_description_text" and hasattr(self.main_window, 'problem_display'):
-                problem_description = self.main_window.problem_display.problem_description
                 # Restore the original style
-                problem_description.setStyleSheet(self.original_styles.get("problem_description_style", ""))
+                self.main_window.problem_display.set_highlight(False)
                 continue
 
             # Check if it's the data file indicator text

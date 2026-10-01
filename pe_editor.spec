@@ -23,6 +23,8 @@ data_dirs = [
     ('themes', 'themes'),
     ('tutorials', 'tutorials'),
     ('ui', 'ui'),
+    # Offline MathJax used to typeset the math in problem descriptions
+    ('mathjax', 'mathjax'),
     # Also include the progress.json if it's there
     ('progress.json', '.'),
 ]
@@ -40,7 +42,7 @@ a = Analysis(
     pathex=[],
     binaries=[],
     datas=data_dirs,
-    hiddenimports=['PyQt6', 'pylint', 'black'], # Ensure hidden dependencies are bundled
+    hiddenimports=['PyQt6', 'PyQt6.QtWebEngineWidgets', 'PyQt6.QtWebEngineCore', 'pylint', 'black'], # Ensure hidden dependencies are bundled
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],
@@ -78,6 +80,7 @@ coll = COLLECT(
     a.datas,
     strip=False,
     upx=True,
-    upx_exclude=[],
+    # UPX can corrupt the Chromium-based QtWebEngine binaries
+    upx_exclude=['QtWebEngineProcess', 'QtWebEngineProcess.exe', 'libQt6WebEngineCore.so.6', 'Qt6WebEngineCore.dll'],
     name='pe_editor',
 )

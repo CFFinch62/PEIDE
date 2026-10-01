@@ -1,7 +1,83 @@
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QTextEdit, QLabel, QPushButton, QDialog
 from PyQt6.QtCore import pyqtSignal, Qt, QUrl
-from PyQt6.QtGui import QDesktopServices, QIcon
+from PyQt6.QtGui import QDesktopServices, QIcon, QColor
 import os
+
+from ui.problem_renderer import build_page, mathjax_base_url
+
+try:
+    from PyQt6.QtWebEngineWidgets import QWebEngineView
+    WEBENGINE_AVAILABLE = True
+except ImportError:
+    # Without QtWebEngine, fall back to plain text (math is shown as raw TeX)
+    WEBENGINE_AVAILABLE = False
+
+
+class ProblemTextView(QWidget):
+    """Read-only view of problem text that typesets the math when possible."""
+
+    def __init__(self, font_size=12, padding=10, parent=None):
+        super().__init__(parent)
+        self.font_size = font_size
+        self.padding = padding
+        self._text = ""
+        self._highlight = False
+
+        layout = QVBoxLayout(self)
+        layout.setContentsMargins(0, 0, 0, 0)
+
+        if WEBENGINE_AVAILABLE:
+            self.view = QWebEngineView()
+            self.view.page().setBackgroundColor(QColor("#000000"))
+            self.view.setContextMenuPolicy(Qt.ContextMenuPolicy.NoContextMenu)
+        else:
+            self.view = QTextEdit()
+            self.view.setReadOnly(True)
+            self._apply_text_edit_style()
+        layout.addWidget(self.view)
+
+    def _apply_text_edit_style(self):
+        color = "#FFD700" if self._highlight else "#FFFFFF"
+        weight = "bold" if self._highlight else "normal"
+        self.view.setStyleSheet(f"""
+            QTextEdit {{
+                background-color: #000000;
+                color: {color};
+                font-weight: {weight};
+                border: none;
+                padding: {self.padding}px;
+                font-family: Arial;
+                font-size: {self.font_size}pt;
+            }}
+        """)
+
+    def _render(self):
+        if WEBENGINE_AVAILABLE:
+            page = build_page(self._text, font_size=self.font_size,
+                              padding=self.padding, highlight=self._highlight)
+            self.view.setHtml(page, mathjax_base_url())
+        else:
+            self.view.setPlainText(self._text)
+
+    def setPlainText(self, text):
+        """Display the given problem text (TeX math is typeset if possible)."""
+        self._text = text
+        self._render()
+
+    def toPlainText(self):
+        return self._text
+
+    def clear(self):
+        self.setPlainText("")
+
+    def set_highlight(self, on):
+        """Highlight the text in bold yellow (used by the tutorial)."""
+        self._highlight = on
+        if WEBENGINE_AVAILABLE:
+            js = f"document.body.classList.toggle('tutorial-highlight', {'true' if on else 'false'});"
+            self.view.page().runJavaScript(js)
+        else:
+            self._apply_text_edit_style()
 
 class ProblemDisplayPanel(QWidget):
     """Panel for displaying problem description and related information."""
@@ -23,18 +99,7 @@ class ProblemDisplayPanel(QWidget):
         layout = QVBoxLayout(self)
         
         # Problem description
-        self.problem_description = QTextEdit()
-        self.problem_description.setReadOnly(True)
-        self.problem_description.setStyleSheet("""
-            QTextEdit {
-                background-color: #000000;
-                color: #FFFFFF;
-                border: none;
-                padding: 10px;
-                font-family: Arial;
-                font-size: 12pt;
-            }
-        """)
+        self.problem_description = ProblemTextView(font_size=12, padding=10)
         layout.addWidget(self.problem_description)
         
         # Data file indicator
@@ -177,6 +242,10 @@ class ProblemDisplayPanel(QWidget):
             self.data_file_indicator.setVisible(False)
             return None
             
+    def set_highlight(self, on):
+        """Highlight the problem text (used by the tutorial)."""
+        self.problem_description.set_highlight(on)
+
     def get_current_hints(self):
         """Get the current problem's hints."""
         return self.current_hints
@@ -201,18 +270,7 @@ class FullscreenProblemDialog(QDialog):
         layout = QVBoxLayout(self)
         
         # Create text edit for problem description
-        self.description = QTextEdit()
-        self.description.setReadOnly(True)
-        self.description.setStyleSheet("""
-            QTextEdit {
-                background-color: #000000;
-                color: #FFFFFF;
-                border: none;
-                padding: 15px;
-                font-family: Arial;
-                font-size: 14pt;
-            }
-        """)
+        self.description = ProblemTextView(font_size=14, padding=15)
         layout.addWidget(self.description)
         
         # Create button layout

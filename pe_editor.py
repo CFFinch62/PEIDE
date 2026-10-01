@@ -1299,6 +1299,8 @@ class MainWindow(QMainWindow):
             pass
 
 if __name__ == '__main__':
+    # Required by QtWebEngine (used to typeset problem math) before the app is created
+    QApplication.setAttribute(Qt.ApplicationAttribute.AA_ShareOpenGLContexts)
     app = QApplication(sys.argv)
 
     # Set application style
