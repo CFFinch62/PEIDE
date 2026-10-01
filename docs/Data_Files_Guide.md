@@ -1,10 +1,8 @@
 # Project Euler Data Files
 
-This directory contains data files required for solving certain Project Euler problems. All required data files are included in this directory and are automatically loaded by the application when needed.
+This directory contains data files required for solving certain Project Euler problems. The data files for problems 1-100 are included. Data files for later problems are added as you reach them (see below).
 
-## Available Data Files
-
-The following data files are available and ready to use:
+## Included Data Files (Problems 1-100)
 
 1. `names.txt` (Problem 22)
    - Contains over five thousand first names
@@ -82,16 +80,27 @@ puzzles = problem_manager.load_sudoku_data()
 pairs = problem_manager.load_base_exp_data()
 ```
 
-Each method returns the data in a format suitable for solving the corresponding problem. If a file is missing, the method will return `None`.
+Each method returns the data in a format suitable for solving the corresponding problem. If a file is missing, the method raises `FileNotFoundError`.
 
-## Obtaining Missing Files
+## Data Files for Problems Above 100
 
-If any data file is missing from this directory, you can obtain it by:
+Data files for later problems are not included. When a problem needs one:
 
-1. Visit the Project Euler website (https://projecteuler.net)
-2. Log in to your account
-3. Navigate to the specific problem page
-4. Click the "Download" link next to the data file
-5. Save the file in this directory with the exact name specified above
+1. Download the file from the problem's page on https://projecteuler.net.
+2. In the editor, open the problem, go to the **Data Files** tab and click **Add Data File...**, then choose the downloaded file.
 
-Note: All required data files should already be present in this directory. You should only need to download files if they have been accidentally deleted or corrupted. 
+The file is copied into the `data` folder with the problem number at the front of its name (e.g. `0102_triangles.txt`), which is how the editor matches it to the problem. If the problem already has a data file, the button reads **Replace Data File...**.
+
+Files saved directly into the `data` folder are also recognised if their name starts with the problem number, as Project Euler's downloads do (`0102_triangles.txt`, or `p102_triangles.txt` for older downloads). Restart the editor after adding a file this way.
+
+Load the file in your solution with:
+
+```python
+lines = problem_manager.load_data(102)
+```
+
+`load_data` returns the file as a list of strings, one per line; parse each line as the problem requires. The **Insert Data Loading Code** button on the Data Files tab inserts this line for you.
+
+## Replacing a Missing File for Problems 1-100
+
+Download the file from the problem's page on https://projecteuler.net and save it in the `data` folder with the exact name listed above.

@@ -14,7 +14,7 @@ from PyQt6.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout,
                             QHBoxLayout, QPushButton, QLabel,
                             QSplitter, QMessageBox,
                             QProgressBar, QStatusBar, QTabWidget, QDialog, QToolBar,
-                            QListWidget)
+                            QListWidget, QFileDialog)
 from PyQt6.QtCore import Qt, QUrl
 from PyQt6.QtGui import QAction, QDesktopServices, QIcon
 
@@ -219,6 +219,7 @@ class MainWindow(QMainWindow):
         # Create data file panel
         self.data_file_panel = DataFilePanel(self.settings_manager)
         self.data_file_panel.insert_code_requested.connect(self.insert_data_loading_code)
+        self.data_file_panel.add_file_requested.connect(self.add_data_file)
         data_files_layout.addWidget(self.data_file_panel)
 
         # Add data files tab to tab widget
@@ -353,41 +354,64 @@ class MainWindow(QMainWindow):
         if index == self.debug_tab_index:
             self.remove_debug_tab_highlight()
 
-        # If switching to data files tab, ensure it's properly enabled
+        # If switching to data files tab, refresh it for the current problem
         if index == self.data_files_tab_index:
             problem_number = self.progress_integration.get_current_problem_number()
             if problem_number:
-                data_info = self.problem_manager.get_problem_data_info(problem_number)
-
-                if data_info['has_data']:
-                    # Enable the tab and panel
-                    self.tab_widget.setTabEnabled(index, True)
-                    self.data_file_panel.setEnabled(True)
-
-                    # Update the panel with data info
-                    self.data_file_panel.update_data_info(data_info)
-
-                    # Try to load data preview
-                    try:
-                        data_content = self.problem_manager.load_data_file_preview(data_info['file'])
-                        self.data_file_panel.update_data_preview(data_content)
-                    except Exception as e:
-                        self.data_file_panel.update_data_preview(f"Error loading data preview: {str(e)}")
-                else:
-                    # Disable the tab and panel
-                    self.tab_widget.setTabEnabled(index, False)
-                    self.data_file_panel.setEnabled(False)
-                    self.data_file_panel.clear()
-
-                    # Switch back to solution tab
-                    self.tab_widget.setCurrentIndex(self.solution_tab_index)
+                self.refresh_data_file_panel(problem_number)
             else:
-                self.tab_widget.setTabEnabled(index, False)
-                self.data_file_panel.setEnabled(False)
                 self.data_file_panel.clear()
 
                 # Switch back to solution tab
                 self.tab_widget.setCurrentIndex(self.solution_tab_index)
+
+    def refresh_data_file_panel(self, problem_number):
+        """Update the data files panel and preview for a problem.
+
+        The Data Files tab stays enabled for every problem so a data file can
+        be added from it even when the problem does not have one yet.
+        """
+        data_info = self.problem_manager.get_problem_data_info(problem_number)
+        self.data_file_panel.update_data_info(data_info)
+
+        if data_info['has_data']:
+            try:
+                data_content = self.problem_manager.load_data_file_preview(data_info['file'])
+                self.data_file_panel.update_data_preview(data_content)
+            except Exception as e:
+                self.data_file_panel.update_data_preview(f"Error loading data preview: {str(e)}")
+                self.debug_integration.log_data_preview_error(e)
+        return data_info
+
+    def add_data_file(self):
+        """Let the user pick a downloaded data file and add it for the current problem."""
+        problem_number = self.progress_integration.get_current_problem_number()
+        if not problem_number:
+            QMessageBox.warning(self, "Add Data File", "Select a problem first.")
+            return
+
+        source_path, _ = QFileDialog.getOpenFileName(
+            self, f"Add Data File for Problem {problem_number}",
+            os.path.expanduser("~/Downloads"), "Text files (*.txt);;All files (*)")
+        if not source_path:
+            return
+
+        existing = self.problem_manager.find_numbered_data_file(problem_number)
+        if existing:
+            reply = QMessageBox.question(
+                self, "Replace Data File",
+                f"Problem {problem_number} already uses '{existing}'.\nReplace it?")
+            if reply != QMessageBox.StandardButton.Yes:
+                return
+
+        try:
+            filename = self.problem_manager.add_data_file(source_path, problem_number)
+        except Exception as e:
+            QMessageBox.critical(self, "Add Data File", f"Could not add data file:\n{str(e)}")
+            return
+
+        self.refresh_data_file_panel(problem_number)
+        self.status_bar.showMessage(f"Added data file '{filename}' for problem {problem_number}", 5000)
 
     def load_problem_by_number(self, problem_number):
         """Load a problem by its number."""
@@ -407,30 +431,10 @@ class MainWindow(QMainWindow):
                 self.progress_grid.navigate_to_problem(problem_number)
 
             # Load problem using the problem display panel
-            data_info = self.problem_display.load_problem(problem_number)
+            self.problem_display.load_problem(problem_number)
 
-            # Update data file panel with the data info
-            self.data_file_panel.update_data_info(data_info)
-
-            # Update data files tab state
-            if data_info and data_info['has_data']:
-                # Enable data files tab
-                self.tab_widget.setTabEnabled(self.data_files_tab_index, True)
-
-                # If we're currently on the data files tab, update its content
-                if self.tab_widget.currentIndex() == self.data_files_tab_index:
-                    self.data_file_panel.update_data_info(data_info)
-                    try:
-                        data_content = self.problem_manager.load_data_file_preview(data_info['file'])
-                        self.data_file_panel.update_data_preview(data_content)
-                    except Exception as e:
-                        self.data_file_panel.update_data_preview(f"Error loading data preview: {str(e)}")
-                        self.debug_integration.log_data_preview_error(e)
-            else:
-                # Disable data files tab
-                self.tab_widget.setTabEnabled(self.data_files_tab_index, False)
-                # Clear data file panel
-                self.data_file_panel.clear()
+            # Update data file panel (the tab stays enabled so data files can be added)
+            self.refresh_data_file_panel(problem_number)
 
             # Load solution if it exists
             solution = self.problem_manager.load_solution(problem_number)
@@ -793,10 +797,12 @@ class MainWindow(QMainWindow):
             return
 
         # Get the loading method from the data info
-        method = self.data_file_panel.current_data_info['method']
+        data_info = self.data_file_panel.current_data_info
+        method = data_info['method']
 
         # Use the CodeEditor's method to insert the data loading code
-        self.code_editor.insert_data_loading_code(method)
+        variable = 'lines' if method == 'load_data' else None
+        self.code_editor.insert_data_loading_code(method, data_info.get('call'), variable)
 
     def update_grid_tooltips(self):
         """Update tooltips for all grid squares with difficulty information."""
@@ -937,23 +943,11 @@ class MainWindow(QMainWindow):
                 self.debug_integration.log_data_files_tab_click()
                 problem_number = self.progress_integration.get_current_problem_number()
                 if problem_number:
-                    data_info = self.problem_manager.get_problem_data_info(problem_number)
-
-                    if data_info['has_data']:
-                        # Switch to the data files tab
-                        self.tab_widget.setCurrentIndex(tab_index)
-                        # Update the panel
-                        self.data_file_panel.update_data_info(data_info)
-                        try:
-                            data_content = self.problem_manager.load_data_file_preview(data_info['file'])
-                            self.data_file_panel.update_data_preview(data_content)
-                        except Exception as e:
-                            self.debug_integration.log_data_preview_error(e)
-                            self.data_file_panel.update_data_preview(f"Error loading data preview: {str(e)}")
-                    else:
+                    # Switch to the data files tab (it stays usable so a data file can be added)
+                    self.tab_widget.setCurrentIndex(tab_index)
+                    data_info = self.refresh_data_file_panel(problem_number)
+                    if not data_info['has_data']:
                         self.debug_integration.log_no_data_available()
-                        # Switch back to solution tab
-                        self.tab_widget.setCurrentIndex(self.solution_tab_index)
                 else:
                     self.debug_integration.log_no_problem_selected()
                     # Switch back to solution tab

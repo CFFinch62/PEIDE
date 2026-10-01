@@ -171,16 +171,10 @@ class ProblemManager:
         # Load or create problem assignments
         self.problem_assignments = self._load_problem_assignments()
 
-        self._ensure_directories()
         self._load_progress()
         self.load_problem_files()
         self.load_solution_files()
         self.load_data_files()
-
-    def _ensure_directories(self):
-        """Create necessary directories if they don't exist."""
-        if not os.path.exists(self.progress_file):
-            self._save_progress()
 
     def _load_progress(self):
         """Load user progress from JSON file."""
@@ -201,15 +195,6 @@ class ProblemManager:
         """Save user progress to JSON file."""
         with open(self.progress_file, 'w') as f:
             json.dump(self.progress, f, indent=4)
-
-    def get_problem(self, problem_number: int) -> str:
-        """Load problem description and hints."""
-        try:
-            with open(f"{self.problems_dir}/problem_{problem_number}.txt", 'r') as f:
-                content = f.read()
-            return content
-        except FileNotFoundError:
-            return f"Problem {problem_number} not found."
 
     def save_solution(self, problem_number: int, code: str, execution_time=None) -> bool:
         """Save a solution for a problem."""
@@ -544,6 +529,7 @@ class ProblemManager:
             print(f"Created data directory at {self.data_dir}")
             return
 
+        self.data_files = {}
         for filename in os.listdir(self.data_dir):
             if filename.endswith('.txt'):
                 file_path = os.path.join(self.data_dir, filename)
@@ -579,7 +565,65 @@ class ProblemManager:
         for problem, info in self.problem_data_files.items():
             if info['file'] == filename:
                 return problem
+        return self._problem_number_from_filename(filename)
+
+    @staticmethod
+    def _problem_number_from_filename(filename):
+        """Extract the problem number from a Project Euler data file name.
+
+        Project Euler names its downloads either '0102_triangles.txt' (current)
+        or 'p102_triangles.txt' (older). Returns None for other names.
+        """
+        match = re.match(r'p?(\d+)_', filename)
+        return int(match.group(1)) if match else None
+
+    def find_numbered_data_file(self, problem_number):
+        """Find a data file in the data directory named after the problem number."""
+        for filename in sorted(self.data_files):
+            if self._problem_number_from_filename(filename) == problem_number:
+                return filename
         return None
+
+    def add_data_file(self, source_path, problem_number):
+        """Copy a downloaded data file into the data directory for a problem.
+
+        The copy is named '<NNNN>_<name>.txt' so it is matched to the problem
+        automatically. Any existing data file for the problem is replaced.
+
+        Returns:
+            str: The filename the data file was saved under.
+        """
+        basename = os.path.basename(source_path)
+        # Strip any existing problem-number prefix before adding our own
+        if self._problem_number_from_filename(basename) is not None:
+            basename = basename.split('_', 1)[1]
+        filename = f"{problem_number:04d}_{basename}"
+
+        existing = self.find_numbered_data_file(problem_number)
+        os.makedirs(self.data_dir, exist_ok=True)
+        shutil.copyfile(source_path, os.path.join(self.data_dir, filename))
+        if existing and existing != filename:
+            os.remove(os.path.join(self.data_dir, existing))
+
+        self.load_data_files()
+        return filename
+
+    def load_data(self, problem_number):
+        """Load the data file for a problem as a list of lines.
+
+        Works for any problem whose data file is named after its number
+        (e.g. '0102_triangles.txt'). Trailing newlines are removed; parse
+        each line as the problem requires.
+        """
+        filename = self.find_numbered_data_file(problem_number)
+        if not filename:
+            raise FileNotFoundError(
+                f"No data file found for problem {problem_number}. "
+                f"Add it from the Data Files tab or download it from "
+                f"https://projecteuler.net/problem={problem_number}")
+
+        with open(self.data_files[filename], 'r') as f:
+            return f.read().splitlines()
 
     def load_triangle_data(self, filename='triangle.txt'):
         """Load triangle data for Problem 67."""
@@ -779,8 +823,28 @@ class ProblemManager:
                 'has_data': True,
                 'file': info['file'],
                 'method': info['method'],
+                'call': f"{info['method']}()",
                 'description': info['description'],
                 'example': self._get_data_example(problem_number)
+            }
+
+        # Any other problem: look for a data file named after the problem number
+        filename = self.find_numbered_data_file(problem_number)
+        if filename:
+            return {
+                'has_data': True,
+                'file': filename,
+                'method': 'load_data',
+                'call': f"load_data({problem_number})",
+                'description': f"Data file for problem {problem_number}",
+                'example': f"""
+# Load the data file
+lines = problem_manager.load_data({problem_number})
+
+# The data is returned as a list of strings, one per line of the file
+# Parse each line as the problem requires, e.g.:
+# rows = [list(map(int, line.split(','))) for line in lines]
+"""
             }
         return {'has_data': False}
 
@@ -978,7 +1042,7 @@ pairs = problem_manager.load_base_exp_data()
             return f"Error loading data preview: {str(e)}"
 
     def get_problem_difficulty(self, problem_number):
-        """Get the difficulty rating for a problem."""
+        """Get the difficulty rating (1-5) for a problem, or None if it has not been rated."""
         # First check the difficulty data
         if str(problem_number) in self.difficulty_data["ratings"]:
             return self.difficulty_data["ratings"][str(problem_number)]
@@ -987,17 +1051,16 @@ pairs = problem_manager.load_base_exp_data()
         if problem_number in self.default_difficulty_ratings:
             return self.default_difficulty_ratings[problem_number]
 
-        # If no rating is found, return 3 as a default
-        return 3
+        # Project Euler only shows difficulty to signed-in members, so most problems are unrated
+        return None
 
     def get_problem_difficulty_percentage(self, problem_number):
-        """Get the Project Euler difficulty percentage for a problem."""
+        """Get the Project Euler difficulty percentage for a problem, or None if it has not been rated."""
         # First check the difficulty data
         if str(problem_number) in self.difficulty_data["percentages"]:
             return self.difficulty_data["percentages"][str(problem_number)]
 
-        # If no percentage is found, return the default percentage
-        return self.default_difficulty_percentages.get(problem_number, 15)
+        return self.default_difficulty_percentages.get(problem_number)
 
     def update_problem_difficulty(self, problem_number, rating, percentage):
         """Update the difficulty rating and percentage for a problem."""

@@ -15,6 +15,8 @@ class DataFilePanel(QWidget):
     
     # Signal emitted when user wants to insert data loading code
     insert_code_requested = pyqtSignal()
+    # Signal emitted when user wants to add a data file for the current problem
+    add_file_requested = pyqtSignal()
     
     def __init__(self, settings_manager):
         """
@@ -33,8 +35,8 @@ class DataFilePanel(QWidget):
         # Apply initial settings
         self._apply_settings()
         
-        # Initially disable the panel
-        self.setEnabled(False)
+        # Nothing to insert until a problem with a data file is loaded
+        self.insert_data_code_button.setEnabled(False)
     
     def _create_ui(self):
         """Create and set up UI components."""
@@ -57,10 +59,18 @@ class DataFilePanel(QWidget):
         self.data_files_text.setFixedHeight(100)
         info_layout.addWidget(self.data_files_text)
         
-        # Insert code button
+        # Buttons
+        button_layout = QHBoxLayout()
         self.insert_data_code_button = QPushButton("Insert Data Loading Code")
         self.insert_data_code_button.clicked.connect(self._handle_insert_code)
-        info_layout.addWidget(self.insert_data_code_button)
+        button_layout.addWidget(self.insert_data_code_button)
+        
+        self.add_data_file_button = QPushButton("Add Data File...")
+        self.add_data_file_button.setToolTip(
+            "Copy a data file downloaded from Project Euler into the data folder for this problem")
+        self.add_data_file_button.clicked.connect(self.add_file_requested.emit)
+        button_layout.addWidget(self.add_data_file_button)
+        info_layout.addLayout(button_layout)
         
         # Preview section
         preview_widget = QWidget()
@@ -120,18 +130,23 @@ class DataFilePanel(QWidget):
                 f"Example Code:\n{data_info['example']}"
             )
             
-            # Enable the panel and button
-            self.setEnabled(True)
+            # Enable the insert button
             self.insert_data_code_button.setEnabled(True)
+            self.add_data_file_button.setText("Replace Data File...")
             
             # Make sure the panel is visible
             self.show()
         else:
-            # Clear and disable the panel
-            self.data_files_text.setPlainText("This problem does not use external data files.")
-            self.data_preview_text.setPlainText("No data file required for this problem.")
-            self.setEnabled(False)
+            # No data file: leave the panel usable so one can be added
+            self.data_files_text.setPlainText(
+                "No data file found for this problem.\n\n"
+                "If the problem needs one, download it from Project Euler and click "
+                "'Add Data File...'. Files saved directly into the data folder are "
+                "also recognised if their name starts with the problem number "
+                "(e.g. 0102_triangles.txt).")
+            self.data_preview_text.setPlainText("No data file for this problem.")
             self.insert_data_code_button.setEnabled(False)
+            self.add_data_file_button.setText("Add Data File...")
     
     def update_data_preview(self, content):
         """
@@ -149,7 +164,6 @@ class DataFilePanel(QWidget):
         self.data_files_text.clear()
         self.data_preview_text.clear()
         self.current_data_info = None
-        self.setEnabled(False)
         self.insert_data_code_button.setEnabled(False)
     
     def showEvent(self, event):

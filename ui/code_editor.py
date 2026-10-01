@@ -460,17 +460,21 @@ if __name__ == "__main__":
             solution_tab_index = 0  # Index of solution tab
             self.switch_to_tab.emit(solution_tab_index)
 
-    def insert_data_loading_code(self, data_method=None):
+    def insert_data_loading_code(self, data_method=None, call=None, variable=None):
         """Insert the data loading code into the code editor.
 
         Args:
             data_method (str): The method to use for loading data.
+            call (str): The full method call, e.g. "load_data(102)". Defaults to "<data_method>()".
+            variable (str): The variable to assign the data to. Defaults to data_method.
         """
         if not data_method:
             return
 
         # Create the loading code
-        loading_code = f"# Load the data file\n{data_method} = problem_manager.{data_method}()\n"
+        call = call or f"{data_method}()"
+        variable = variable or data_method
+        loading_code = f"# Load the data file\n{variable} = problem_manager.{call}\n"
 
         # Get current cursor position
         cursor = self.textCursor()

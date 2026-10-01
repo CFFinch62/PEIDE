@@ -156,7 +156,10 @@ class ProblemDisplayPanel(QWidget):
             difficulty_percentage = self.problem_manager.get_problem_difficulty_percentage(problem_number)
             
             # Add difficulty information to the display
-            difficulty_text = f"\n\nDifficulty: {'★' * difficulty}{'☆' * (5 - difficulty)} ({difficulty_percentage}%)"
+            if difficulty is None:
+                difficulty_text = "\n\nDifficulty: not rated"
+            else:
+                difficulty_text = f"\n\nDifficulty: {'★' * difficulty}{'☆' * (5 - difficulty)} ({difficulty_percentage}%)"
             display_text = self.problem_text + difficulty_text
             
             # Extract hints from the problem text

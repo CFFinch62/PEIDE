@@ -443,6 +443,9 @@ class ProblemGrid(QWidget):
         """Update the tooltip for a specific problem square."""
         square = self.problem_squares.get(problem_number)
         if square:
+            if difficulty is None:
+                square.setToolTip(f"Problem {problem_number}\nDifficulty: not rated")
+                return
             difficulty_stars = '★' * difficulty + '☆' * (5 - difficulty)
             square.setToolTip(f"Problem {problem_number}\nDifficulty: {difficulty_stars} ({percentage}%)")
     

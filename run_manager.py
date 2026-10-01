@@ -82,12 +82,14 @@ class RunManager:
 
                 # Write problem manager import and debug function
                 output_file_path = os.path.join('/tmp', f'pe_output_{os.getpid()}.txt')
+                # Fix the backslash issue by using a variable
+                cwd_path = os.getcwd().replace("'", "\\'")
                 preamble_code = f"""
 import sys
 import os
 import time
 from pathlib import Path
-sys.path.append('{os.getcwd().replace("'", "\\'")}')
+sys.path.append('{cwd_path}')
 from problem_manager import ProblemManager
 
 # Create an instance of ProblemManager
