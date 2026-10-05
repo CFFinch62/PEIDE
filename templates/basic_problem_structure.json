@@ -1,5 +1,5 @@
 {
     "name": "Basic Problem Structure",
-    "description": "Basic template for Project Euler problems",
-    "code": "\"\"\"\nProject Euler Problem {problem_number}\n\"\"\"\n\ndef solve():\n    \"\"\"\n    Your solution goes here.\n    This function should return the answer to the problem.\n    \"\"\"\n    # Your code here\n    return None\n\nif __name__ == \"__main__\":\n    print(solve())\n"
+    "description": "Starting layout for a solution: title, idea note, helper imports, solve() and the expected answer",
+    "code": "\"\"\"\nProject Euler Problem N: Title\n\nIdea: one or two sentences naming the mathematical idea the solution uses.\n\"\"\"\n\n# from helpers.<module> import <function>    # the helpers this solution uses\n\nLIMIT = 10\n\n\ndef solve():\n    # Your solution goes here; return the answer.\n    return None\n\n\n# expected answer:\n"
 }

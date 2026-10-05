@@ -1,0 +1,5 @@
+{
+    "name": "Search Upward Until Found",
+    "description": "Count up from a start value until a test passes",
+    "code": "def is_answer(n):\n    # Replace with the problem's test.\n    # (This example: a multiple of 7 whose digits add up to 20.)\n    return n % 7 == 0 and sum(int(d) for d in str(n)) == 20\n\n\ndef solve():\n    n = 1\n    while not is_answer(n):\n        n += 1\n    return n\n\n\n# expected answer for this example: 497\n"
+}

@@ -1,0 +1,5 @@
+{
+    "name": "Group By Signature",
+    "description": "Collect items into groups that share a key, such as sorted letters for anagrams or sorted digits for permutations",
+    "code": "from collections import defaultdict\n\n\ndef signature(item):\n    # Items with the same signature belong together.\n    # Sorted characters group anagrams (words) or digit permutations (numbers).\n    return \"\".join(sorted(str(item)))\n\n\ndef solve():\n    words = [\"listen\", \"silent\", \"enlist\", \"google\", \"inlets\", \"banana\", \"gogole\"]\n    groups = defaultdict(list)         # signature -> items that share it\n    for word in words:\n        groups[signature(word)].append(word)\n    return max(groups.values(), key=len)\n\n\n# expected answer for this example: ['listen', 'silent', 'enlist', 'inlets']\n"
+}

@@ -1,135 +1,140 @@
-# Project Euler Helper Files
+# Building Your Own Helper Library
 
-This document provides an overview of all helper files available in the `helpers` directory. These files contain utility functions that can be used across multiple Project Euler problems.
+As you solve Project Euler problems, the same ideas keep coming back:
+testing for primes, adding up digits, counting divisors, walking a grid.
+The editor gives you two places to keep reusable code so you write each idea
+once and then reuse it:
 
-## Import Guidelines
+- **Helpers** (`helpers/`, the Helper Files tab) are Python modules of
+  *functions* you import into your solutions.
+- **Templates** (`templates/`, the Templates tab) are *code patterns* you
+  insert into the editor and then adapt: how to load a data file, how to
+  search with an early exit, how to set up a dynamic programming table.
 
-When using helper functions, it's important to import them correctly. Here are some guidelines:
+A good rule: if you would call it, it is a helper; if you would copy it and
+change it, it is a template.
 
-1. Always import from the `helpers` package:
-   ```python
-   # Correct
-   from helpers.number_theory import gpf
-   from helpers.primes import is_prime
-   
-   # Incorrect
-   from number_theory import gpf  # Missing 'helpers' package
-   ```
+## Why bother
 
-2. Import functions directly, not as modules:
-   ```python
-   # Correct
-   from helpers.number_theory import gpf
-   result = gpf(number)  # Use the function directly
-   
-   # Incorrect
-   from helpers.number_theory import gpf
-   result = gpf.gpf(number)  # Don't treat the function as a module
-   ```
-
-3. If you need multiple functions from the same module:
-   ```python
-   # Correct
-   from helpers.number_theory import gpf, is_perfect, is_abundant
-   
-   # Also correct
-   from helpers import number_theory
-   result = number_theory.gpf(number)
-   ```
-
-## Number Theory Functions (`number_theory.py`)
-
-Functions for number theory operations and number classification:
-
-- `gpf(n)`: Returns the greatest prime factor of a number n
-- `all_factors(n)`: Returns all factors of a number n
-- `proper_factors(n)`: Returns all proper factors of n (excluding 1 and n)
-- `proper_divisors(n)`: Returns all proper divisors of n (excluding n itself)
-- `is_perfect(n)`: Checks if a number is perfect (sum of proper divisors equals the number)
-- `is_abundant(n)`: Checks if a number is abundant (sum of proper divisors exceeds the number)
-- `is_deficient(n)`: Checks if a number is deficient (sum of proper divisors is less than the number)
-- `is_triangular(n)`: Checks if a number is triangular
-- `is_pentagonal(n)`: Checks if a number is pentagonal
-- `is_hexagonal(n)`: Checks if a number is hexagonal
-- `is_pandigital(n, b, z)`: Checks if a number is pandigital in a given base
-
-## String Utilities (`string_utils.py`)
-
-Functions for string manipulation and text processing:
-
-- `is_palindrome(s)`: Checks if a string is a palindrome
-- `ltr_to_int(ltr)`: Converts a letter to its position in the alphabet (A=1, B=2, etc.)
-- `int_to_ltr(num)`: Converts a number to its corresponding letter in the alphabet (1=A, 2=B, etc.)
-- `word_score(w)`: Calculates the score of a word by summing the positions of its letters
-
-## Cipher Functions (`ciphers.py`)
-
-Functions for encryption and decryption:
-
-- `caesar_cipher_decoder(message, offset)`: Decodes a message using the Caesar cipher
-- `caesar_cipher_encoder(message, offset)`: Encodes a message using the Caesar cipher
-- `vigenere_cipher_decoder(message, key)`: Decodes a message using the Vigenère cipher
-- `vigenere_cipher_encoder(message, key)`: Encodes a message using the Vigenère cipher
-
-## Array Utilities (`array_utils.py`)
-
-Functions for array manipulation and sorting:
-
-- `bubble_sort(arr, d=True)`: Sorts an array using bubble sort algorithm
-- `get_2D_row(r, a)`: Gets a specific row from a 2D array
-- `get_2D_col(c, a)`: Gets a specific column from a 2D array
-
-## Number Conversion (`number_conversion.py`)
-
-Functions for number conversion and binary operations:
-
-- `decimalToBinary(n)`: Converts a decimal number to binary
-- `genRandomBinaryString(n)`: Generates a random binary string of length n
-- `sum_digits(n)`: Calculates the sum of digits in a number
-
-## Sequence Functions (`sequences.py`)
-
-Functions for generating and analyzing number sequences:
-
-- `collatz_chain(n)`: Generates the Collatz chain for a number n
-- `is_lychrel(n)`: Checks if a number is a Lychrel number
-- `is_curzon(num)`: Checks if a number is a Curzon number
-
-## Mathematical Utilities (`math_utils.py`)
-
-General mathematical utility functions:
-
-- `choose(r, d)`: Calculates the binomial coefficient (r choose d)
-- `create_integer_set(start, limit)`: Creates a set containing integers from start up to the given limit (inclusive)
-- `find_abundant_numbers(limit)`: Finds all abundant numbers up to a given limit
-- `pairwise_sums(numbers)`: Generates all possible sums of combinations of 2 numbers from a list
-- `is_square(x)`: Checks if a number is a perfect square
-- `is_odd(n)`: Checks if a number is odd
-- `progress_bar(progress, total)`: Displays a progress bar
-
-## Usage Example
-
-To use these helper functions in your Project Euler solutions:
+A solution that imports its tools tells you, at a glance, how it works:
 
 ```python
-from helpers.number_theory import is_prime
-from helpers.string_utils import is_palindrome
-from helpers.math_utils import is_square
-
-# Example usage
-if is_prime(17):
-    print("17 is prime")
-
-if is_palindrome("racecar"):
-    print("racecar is a palindrome")
-
-if is_square(16):
-    print("16 is a perfect square")
+from helpers.primes import prime_sieve
+from helpers.digits import is_palindrome
 ```
 
-## Notes
+Those two lines already say "sieve the primes, then test palindromes". Months
+later, that is far easier to understand than fifty lines of inline code.
 
-- All functions include detailed docstrings explaining their purpose, arguments, and return values
-- Functions are organized by category for easy reference
-- Some functions may have dependencies on others within their category
-- Most functions are optimized for performance and readability 
+## Organizing helpers
+
+Group functions by the *idea* they support, one module per idea. A layout
+that works well after a hundred or so problems:
+
+| Module | What goes in it |
+|---|---|
+| `primes.py` | primality tests, prime lists, factorization |
+| `sieves.py` | tables of a value for every number up to n (smallest factor, totient, ...) |
+| `divisors.py` | divisors, divisor sums, perfect and abundant numbers, gcd and lcm |
+| `digits.py` | digit sums, palindromes, pandigitals, digit permutations |
+| `sequences.py` | sum formulas, Fibonacci, triangle and other figurate numbers, chains |
+| `combinatorics.py` | binomial coefficients, permutations, partitions, counting ways |
+| `grids.py` | paths through grids and triangles |
+| `text.py` | letter scores, words, number names |
+
+You do not need all of these on day one. Start with the sample module,
+`helpers/example.py`, and split it into modules as it grows.
+
+## Writing a helper function
+
+Every helper function gets a docstring with three parts:
+
+```python
+def digit_sum(n):
+    """Return the sum of the decimal digits of n.
+
+    >>> digit_sum(2 ** 15)
+    26
+
+    Problems: 16, 20
+    """
+    return sum(int(d) for d in str(n))
+```
+
+1. **What it returns**, in one line. This line also appears in the index.
+2. **An example**: a `>>>` line, then the result it should give. This is
+   documentation and a test at the same time.
+3. **A `Problems:` line** listing the problems you have used it for. Leave it
+   empty (`Problems:`) until you use the function in a solution.
+
+## Importing helpers
+
+Always import from the `helpers` package, and import the functions by name:
+
+```python
+from helpers.digits import digit_sum, is_palindrome   # correct
+from digits import digit_sum                          # wrong: missing "helpers."
+```
+
+Helpers can use each other the same way (`from helpers.primes import is_prime`).
+
+## The two helper tools
+
+Run these from the project folder.
+
+**Test your helpers**: runs every `>>>` example in every helper module and
+reports any whose result has changed.
+
+```bash
+python -m tools.test_helpers
+```
+
+Run it after you change a helper, so a "small improvement" can't quietly
+break solutions that depend on it.
+
+**Build the index**: writes `helpers/INDEX.md`, a table of every helper
+function with the problems it applies to, and every solved problem with the
+helpers it uses. It also adds each solution's helper imports to the Helpers
+panel, so opening a problem shows the helper files it uses. (Files you
+assigned by hand in the Helpers panel are kept.)
+
+```bash
+python -m tools.build_helper_index
+```
+
+## Templates
+
+The editor ships with ten templates. Insert one from the Templates tab, then
+replace the parts the comments point out:
+
+| Template | Use it when |
+|---|---|
+| Basic Problem Structure | starting any new solution |
+| Check Against the Example | the problem statement works a small case you can test against |
+| Load Data File | the problem comes with a data file |
+| Search Upward Until Found | you want the first number that passes a test |
+| Search Downward With Early Exit | you want the largest result and can stop once nothing left can beat it |
+| Sieve Once, Then Scan | you need a fact (prime, divisor count, ...) about every number up to a limit |
+| Dynamic Programming Table | the answer for a big case is built from answers for smaller cases |
+| Backtracking Search | you build an answer one choice at a time and can rule out dead ends early |
+| Memoized Recursion and Chains | the same sub-results or chain values come up again and again |
+| Group By Signature | items belong together when they share a key, such as anagrams or digit permutations |
+
+Each template runs as-is on a small example (not a Project Euler problem),
+so you can use **Test Template** to see it work before adapting it. Save your
+own templates from the Templates tab as you discover patterns of your own.
+
+## A suggested routine
+
+1. Start a problem with **Basic Problem Structure**, and note the idea in the
+   docstring.
+2. Write the solution. If you write something you have written before, move it
+   into a helper with a docstring, an example and a `Problems:` line.
+3. When it is solved, add the problem number to the `Problems:` line of each
+   helper you used, then run the two tools.
+
+## Sharing your work
+
+Project Euler asks solvers not to publish solutions beyond the first hundred
+problems. Keep your own `solutions/` and any problem-specific helpers private;
+general tools such as a prime sieve are fine to share.

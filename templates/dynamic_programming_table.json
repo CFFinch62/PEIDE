@@ -1,0 +1,5 @@
+{
+    "name": "Dynamic Programming Table",
+    "description": "Build answers for small cases first and combine them into bigger ones (counting ways, best paths)",
+    "code": "def count_ways(target, parts):\n    \"\"\"Ways to make target from parts, reusing parts, order ignored.\"\"\"\n    ways = [1] + [0] * target          # ways[t] = number of ways to make t\n    for part in parts:\n        for t in range(part, target + 1):\n            ways[t] += ways[t - part]  # use this part once more on top of t - part\n    return ways[target]\n\n\ndef best_path(triangle):\n    \"\"\"Largest top-to-bottom total moving to an adjacent number below, worked from the bottom up.\"\"\"\n    best = list(triangle[-1])          # best[i] = best total from this row's cell i down\n    for row in reversed(triangle[:-1]):\n        best = [value + max(best[i], best[i + 1]) for i, value in enumerate(row)]\n    return best[0]\n\n\ndef solve():\n    return count_ways(5, [1, 2, 5]), best_path([[1], [2, 3], [4, 5, 6]])\n\n\n# expected answer for this example: (4, 10)\n"
+}

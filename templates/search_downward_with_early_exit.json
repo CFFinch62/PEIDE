@@ -1,0 +1,5 @@
+{
+    "name": "Search Downward With Early Exit",
+    "description": "Search from the largest candidates down, stopping as soon as nothing left can beat the best so far",
+    "code": "LOW, HIGH = 10, 99\n\n\ndef is_answer(product):\n    # Replace with the problem's test.\n    # (This example: every digit of the product is even.)\n    return all(int(d) % 2 == 0 for d in str(product))\n\n\ndef solve():\n    best = 0\n    for a in range(HIGH, LOW - 1, -1):\n        if a * HIGH <= best:           # nothing in this row or below can win\n            break\n        for b in range(HIGH, a - 1, -1):\n            product = a * b\n            if product <= best:        # the rest of this row is smaller still\n                break\n            if is_answer(product):\n                best = product\n    return best\n\n\n# expected answer for this example: 8820\n"
+}

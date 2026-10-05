@@ -1,0 +1,5 @@
+{
+    "name": "Check Against the Example",
+    "description": "Write the solution for any limit, check it on the problem's worked example, then run the real limit",
+    "code": "def answer(limit):\n    # Your method, written for any limit so it can be checked on a small case.\n    # (This example adds the squares of the odd numbers below the limit.)\n    return sum(n * n for n in range(limit) if n % 2 == 1)\n\n\ndef solve():\n    # Most problems work a small case in the statement; match it first.\n    assert answer(10) == 165, \"does not match the worked example\"\n    return answer(1000)\n"
+}

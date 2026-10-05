@@ -1,0 +1,5 @@
+{
+    "name": "Sieve Once, Then Scan",
+    "description": "Build a table for every number up to a limit in one pass, then answer each question with a lookup",
+    "code": "LIMIT = 100\n\n\ndef prime_flags(limit):\n    \"\"\"Sieve of Eratosthenes: flags[k] is True when k is prime.\n    (Once you need it twice, move it into your helpers.)\"\"\"\n    flags = [True] * (limit + 1)\n    flags[0] = flags[1] = False\n    for p in range(2, int(limit ** 0.5) + 1):\n        if flags[p]:\n            for multiple in range(p * p, limit + 1, p):\n                flags[multiple] = False\n    return flags\n\n\ndef solve():\n    is_prime = prime_flags(LIMIT)      # one pass fills the whole table\n    # Every question is now a list lookup. Example: twin primes (p, p + 2) below 100.\n    return sum(1 for p in range(2, LIMIT - 1) if is_prime[p] and is_prime[p + 2])\n\n\n# expected answer for this example: 8\n"
+}

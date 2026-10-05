@@ -11,8 +11,8 @@ A comprehensive IDE designed specifically for solving and managing [Project Eule
 - **Code Editor**: Syntax highlighting, auto-completion, and line numbers
 - **Code Formatting**: Format your code with Black
 - **Code Linting**: Lint your code with Pylint
-- **Helper Files**: Create and manage reusable code modules
-- **Code Templates**: Save and reuse code templates
+- **Helper Files**: Build your own library of reusable functions, with tools to test it and index which problems use what
+- **Code Templates**: Ten ready-made solution patterns (searches, sieves, dynamic programming, backtracking, ...), plus your own
 - **Data Files**: Access and preview problem data files
 - **Solution Verification**: Verify your solutions against known answers
 - **Progress Tracking**: Track your solved problems with a visual grid
@@ -69,8 +69,10 @@ If you prefer to run the application from source code instead of using the pre-b
 - `dialogs/`: Application dialogs
 - `problems/`: Problem descriptions (HTML from projecteuler.net, with images in `problems/resources/`) and metadata
 - `tools/import_problems.py`: Re-downloads problem descriptions from projecteuler.net (`python tools/import_problems.py --help`)
+- `tools/test_helpers.py`: Runs the examples in your helper docstrings as tests (`python -m tools.test_helpers`)
+- `tools/build_helper_index.py`: Writes `helpers/INDEX.md`, showing which helpers each solved problem uses (`python -m tools.build_helper_index`)
 - `solutions/`: Saved solutions
-- `helpers/`: Helper modules for problem solving
+- `helpers/`: Your helper modules (starts with a sample, `example.py`)
 - `templates/`: Code templates
 - `data/`: Data files for problems
 - `tutorials/`: Tutorial content
@@ -82,7 +84,9 @@ If you prefer to run the application from source code instead of using the pre-b
 3. **Running Code**: Click "Run Code" to execute your solution
 4. **Verifying Solutions**: Click "Verify Answer" to check your solution
 5. **Managing Helper Files**: Use the Helper Files tab to create and manage helper modules
-6. **Using Templates**: Use the Templates tab to save and reuse code snippets
+6. **Using Templates**: Use the Templates tab to insert a pattern and adapt it, or save your own
+
+See [docs/Helper_Files_Guide.md](docs/Helper_Files_Guide.md) for how to grow your own helper library as you solve problems.
 
 ## License
 
