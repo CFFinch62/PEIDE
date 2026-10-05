@@ -6,7 +6,7 @@ A comprehensive IDE designed specifically for solving and managing [Project Eule
 
 ## Features
 
-- **Dual Mode Support**: Basic mode (100 problems) and Max mode (945 problems)
+- **Dual Mode Support**: Basic mode (100 problems) and Max mode (1013 problems)
 - **Problem Management**: Browse, view, and manage Project Euler problems
 - **Code Editor**: Syntax highlighting, auto-completion, and line numbers
 - **Code Formatting**: Format your code with Black
