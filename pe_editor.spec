@@ -59,6 +59,22 @@ a = Analysis(
     cipher=block_cipher,
     noarchive=False,
 )
+
+# Leave out Python caches and Dropbox conflict copies that may sit inside the
+# project's own folders: __pycache__ folders, .pyc files and any file named
+# "... (... conflicted copy ...)". Library files PyInstaller collects for
+# Qt and other packages are not touched.
+project_dirs = {dest for src, dest in data_dirs if os.path.isdir(src)}
+
+def is_build_junk(dest_name):
+    parts = dest_name.replace('\\', '/').split('/')
+    if parts[0] not in project_dirs:
+        return False
+    return ('__pycache__' in parts or dest_name.endswith('.pyc')
+            or 'conflicted copy' in parts[-1])
+
+a.datas = [entry for entry in a.datas if not is_build_junk(entry[0])]
+
 pyz = PYZ(a.pure, a.zipped_data, cipher=block_cipher)
 
 exe = EXE(
