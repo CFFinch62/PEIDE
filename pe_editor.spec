@@ -32,12 +32,17 @@ data_dirs = [
 ]
 
 # Configure icon string based on platform
+# images/pe_icon.ico is made from PEIDE.png. Linux handles icons differently
+# (via .desktop files usually), so it gets none. A missing icon file only
+# skips the icon instead of stopping the build.
 icon_path = None
 if sys.platform == 'win32':
-    icon_path = 'images/pe_icon.ico' # Ensure you have an .ico in this path on windows
+    icon_path = 'images/pe_icon.ico'
 elif sys.platform == 'darwin': # macOS
-    icon_path = 'images/pe_icon.icns' # Ensure you have an .icns here for mac
-# Linux handles icons differently (via .desktop files usually) so we can leave it None
+    icon_path = 'images/pe_icon.icns'
+if icon_path and not os.path.exists(icon_path):
+    print(f"WARNING: {icon_path} not found; building without an application icon")
+    icon_path = None
 
 a = Analysis(
     ['pe_editor.py'],
