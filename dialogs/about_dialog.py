@@ -15,7 +15,7 @@ class AboutDialog:
         """Show the about dialog with application information."""
         about_text = """
         <h2>Project Euler Solutions Editor</h2>
-        <p>Version 1.6</p>
+        <p>Version 7.3</p>
         <p>A specialized editor for solving Project Euler problems with Python.</p>
         <p>© 2025  Chuck Finch - Fragillidae Software</p>
         """
