@@ -68,5 +68,5 @@
         },
         "show_timestamps": true
     },
-    "problem_mode": "max"
+    "problem_mode": "basic"
 }
