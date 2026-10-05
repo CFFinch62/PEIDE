@@ -27,6 +27,8 @@ data_dirs = [
     ('mathjax', 'mathjax'),
     # Window icon
     ('PEIDE.png', '.'),
+    # Shown by Help > Info
+    ('README.md', '.'),
     # Also include the progress.json if it's there
     ('progress.json', '.'),
 ]
